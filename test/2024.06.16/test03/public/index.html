@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Employee Details</h1>
+
+   <button type="button" id="btn" >View Details</button>
+   <div id="content"></div>
+
+   <script>
+     document.getElementById("btn").addEventListener("click",()=>{
+        const content = document.getElementById("content");
+        
+        const xhttp = new XMLHttpRequest();
+        xhttp.open('POST' , "/employee" , true);
+        xhttp.send();
+        xhttp.onload= function(){
+
+         
+         
+          const responce = JSON.parse(xhttp.responseText);
+          
+
+         
+
+          
+         
+        }
+        
+
+     } )
+   </script>
+</body>
+</html>

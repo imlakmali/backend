@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Items</h1>
+    <button id="myButton" onclick="getItem()">clickme</button>
+    <div id="content"></div>
+
+    <script>
+        function getItem(){
+            const xhttp = new XMLHttpRequest();
+            xhttp.open('POST','/items',true);
+            xhttp.send();
+            xhttp.onload = function(){
+                const responce = JSON.parse(xhttp.responseText);
+                document.getElementById('content').innerHTML= responce.name;
+            }
+        }
+    </script>
+</body>
+</html>
