@@ -23,10 +23,11 @@ fs.readFile("quotes.json", (err, data) => {
 app.post("/quotes", (req, res) => {
 
   if (req.body.type && req.body.type == "random") {
-    let myNum = Math.floor(Math.random() * fileData.length);
 
-    selectedQuote = fileData.find(fileData=>fileData.id==myNum)
-    res.send(selectedQuote);
+    let randomInx = generateRandomNumber(0,fileData.length);
+    let selectedQuote = fileData[randomInx]
+
+   res.send(selectedQuote);
   } else {
     res.send({ message: "No quotes found for the given keyword." });
   }
@@ -34,3 +35,9 @@ app.post("/quotes", (req, res) => {
   
 
 });
+
+function generateRandomNumber(lowLimit, upperLimit) {
+
+  let randomNum = Math.floor(Math.random() * (upperLimit-lowLimit)) + lowLimit;
+  return randomNum;
+}
