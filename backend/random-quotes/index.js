@@ -34,7 +34,10 @@ app.post("/quotes", (req, res) => {
       res.send({message:"No quotes found"})
     }
     
+  }else{
+    res.send({message:"No quotes found"});
   }
+
 });
 
 function generateRandomNumber(lowLimit, upperLimit) {
