@@ -36,7 +36,7 @@ function generateQuoteByKeyword() {
 
   xhttp.setRequestHeader("Content-Type", "application/json");
 
-  xhttp.send(JSON.stringify({ type: "search", keyword: inputKeywrd }));
+  xhttp.send({ "type": "search", "keyword": inputKeywrd , "include": "false" });
 
   xhttp.onload = function () {
 
@@ -44,7 +44,8 @@ function generateQuoteByKeyword() {
 
       document.getElementById("quoteText").innerHTML = resData.quote;
       document.getElementById("quoteAuthor").innerHTML = resData.author;
-  
+      
+      
   };
 }
 

@@ -10,13 +10,16 @@ app.use(express.static("public"));
 
 
 app.listen(port, () => {
+
   console.log(`Server is running on port ${port}`);
 });
 
 
 fs.readFile("quotes.json", (err, data) => {
+
   fileData = JSON.parse(data);
 });
+
 
 app.post("/quotes", (req, res) => {
 
@@ -28,33 +31,36 @@ app.post("/quotes", (req, res) => {
 
   } else if (req.body.type && req.body.type == "search") {
 
+    let isInclude = req.body.include;
     let keyword = req.body.keyword.toLowerCase();
-    let filtedQuotes = fileData.filter((fileData) =>
-      fileData.quote.toLowerCase().includes(keyword)
+    let filteredQuotes = fileData.filter((quote) =>
+      quote.quote.toLowerCase().includes(keyword)
     );
 
-    if (filtedQuotes.length > 0) {
+    if (isInclude) {
 
-      let randomIndex = Math.floor(Math.random() * filtedQuotes.length);
-      let selectedQuotes = filtedQuotes[randomIndex];
-      res.send(selectedQuotes);
+      res.send(filteredQuotes);
 
-    }else{
+    } else {
 
-      res.send({message:"No quotes found"})
+      if (filteredQuotes.length > 0) {
+
+        
+        let randomIndex = generateRandomNumber(0, filteredQuotes.length);
+        let selectedQuote = filteredQuotes[randomIndex];
+        res.send(selectedQuote);
+        
+      } else {
+        res.send({ message: "No quotes found" });
+      }
     }
-    
-  }else{
-
-    res.send({message:"No quotes found"});
+  } else {
+    res.send({ message: "No quotes found" });
   }
-
 });
 
 function generateRandomNumber(lowLimit, upperLimit) {
-  
   let randomNum =
     Math.floor(Math.random() * (upperLimit - lowLimit)) + lowLimit;
-
   return randomNum;
 }
