@@ -1,13 +1,28 @@
-document.getElementById("myBtn").addEventListener("click", () => {
+// document.getElementById("myBtn").addEventListener("click", () => {
 
-  generateRandomQuote();
-});
+//   generateRandomQuote();
+// });
+
+$(document).ready(()=>{
+  $("#myBtn").click(()=>{
+    generateRandomQuote();
+  });
+  $("#searchBtn").click(()=>{
+    generateQuoteByKeyword();
+  })
+})
 
 
-document.getElementById("searchBtn").addEventListener("click", () => {
+// document.getElementById("searchBtn").addEventListener("click", () => {
 
-  generateQuoteByKeyword();
-});
+//   generateQuoteByKeyword();
+// });
+
+// $(document).ready(()=>{
+//   $("#searchBtn").click(()=>{
+//     generateQuoteByKeyword();
+//   })
+// })
 
 
 function generateRandomQuote() {
@@ -21,8 +36,8 @@ function generateRandomQuote() {
     
     let resData = JSON.parse(xhttp.responseText);
 
-    document.getElementById("quoteText").innerHTML = resData.quote;
-    document.getElementById("quoteAuthor").innerHTML = resData.author;
+    $("#quoteText").html(resData.quote);
+    $("#quoteAuthor").html(resData.author);
   };
 }
 
@@ -42,8 +57,8 @@ function generateQuoteByKeyword() {
 
     let resData = JSON.parse(xhttp.responseText);
 
-      document.getElementById("quoteText").innerHTML = resData.quote;
-      document.getElementById("quoteAuthor").innerHTML = resData.author;
+    $("#quoteText").html(resData.quote);
+    $("#quoteAuthor").html(resData.author);
       
       
   };
