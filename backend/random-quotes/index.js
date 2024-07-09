@@ -12,7 +12,7 @@ app.use(express.static("public"));
 app.listen(port, () => {
 
   console.log(`Server is running on port ${port}`);
-});
+}); 
 
 
 fs.readFile("quotes.json", (err, data) => {
@@ -23,6 +23,7 @@ fs.readFile("quotes.json", (err, data) => {
 
 app.post("/quotes", (req, res) => {
 
+  // console.log(request.body);
   if (req.body.type && req.body.type == "random") {
     let randomInx = generateRandomNumber(0, fileData.length);
     let selectedQuote = fileData[randomInx];
@@ -33,8 +34,7 @@ app.post("/quotes", (req, res) => {
 
     let isInclude = req.body.include;
     let keyword = req.body.keyword.toLowerCase();
-    let filteredQuotes = fileData.filter((quote) =>
-      quote.quote.toLowerCase().includes(keyword)
+    let filteredQuotes = fileData.filter((quote) =>quote.quote.toLowerCase().includes(keyword)
     );
 
     if (isInclude) {
@@ -51,11 +51,11 @@ app.post("/quotes", (req, res) => {
         res.send(selectedQuote);
         
       } else {
-        res.send({ message: "No quotes found" });
+        res.send({ message: "No quotes found(1)" });
       }
     }
   } else {
-    res.send({ message: "No quotes found" });
+    res.send({ message: "No quotes found(2)" });
   }
 });
 
