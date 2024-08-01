@@ -13,30 +13,26 @@ $(document).ready(() => {
   });
 });
 
-
-
 function generateRandomQuote() {
 
   $.ajax({
-    
     url: "/quotes",
     type: "POST",
     contentType: "application/json",
     data: JSON.stringify({ type: "random" }),
-    success: function(resData) {
+
+    success: function (resData) {
       $("#quoteText").html(resData.quote);
       $("#quoteAuthor").html(resData.author);
-    }
+    },
 
   });
 
 }
 
-
-
 function generateQuoteByKeyword() {
 
-  let inputkeyword = $("#inputKeyword").val();  
+  let inputkeyword = $("#inputKeyword").val();
   let includeAll = $("#myCheckbox").is(":checked");
   // console.log("inputKeyword", inputKeyword)
 
@@ -44,20 +40,17 @@ function generateQuoteByKeyword() {
     url: "/quotes",
     type: "POST",
     contentType: "application/json",
-    data: JSON.stringify({ type: "search", keyword: inputkeyword, include: includeAll }),
-    success: function(resData) {
+    data: JSON.stringify({type: "search",keyword: inputkeyword, include: includeAll,
+    }),
 
-      console.log("res data", resData)
-
-   $("#quoteText").html(resData.quote);
-   $("#quoteAuthor").html(resData.author);
-    }
+    success: function (resData) {
+      // console.log("res data", resData)
+      $("#quoteText").html(resData.quote);
+      $("#quoteAuthor").html(resData.author);
+      
+    },
   });
 }
-
-
-
-
 
 // function generateRandomQuote() {
 
@@ -67,15 +60,13 @@ function generateQuoteByKeyword() {
 //   xhttp.send(JSON.stringify({ type: "random" }));
 
 //   xhttp.onload = function () {
-    
+
 //     let resData = JSON.parse(xhttp.responseText);
 
 //     $("#quoteText").html(resData.quote);
 //     $("#quoteAuthor").html(resData.author);
 //   };
 // }
-
-
 
 // function generateQuoteByKeyword() {
 
@@ -94,7 +85,6 @@ function generateQuoteByKeyword() {
 
 //     $("#quoteText").html(resData.quote);
 //     $("#quoteAuthor").html(resData.author);
-      
-      
+
 //   };
 // }
