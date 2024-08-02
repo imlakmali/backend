@@ -40,8 +40,35 @@ function copyChildren(currentParents, destArray){
        })
     });
 
-
+return newParents
 
 }
 copyChildren(currentParents, destArray)
 console.log(JSON.stringify(destArray));
+
+
+
+function findChildren(parentId) {
+    let result = []
+    data.forEach(item=>{
+        if(item.parent_id === parentId){
+            let child = {
+                id: item.id,
+                name : item.name,
+                children : findChildren(item.id)
+            }
+    result.push(child)
+        }
+    })
+   return result;
+}
+
+
+let hierarchy = findChildren("3");
+console.log(JSON.stringify(hierarchy));
+
+
+
+
+   
+
