@@ -1,3 +1,6 @@
+
+
+
 let data = [
     { "id": "1", "name": "ROOT", "parent_id": "0" },
     { "id": "2", "name": "A", "parent_id": "1" },
@@ -11,6 +14,32 @@ let data = [
     { "id": "10", "name": "B2", "parent_id": "3" },
     { "id": "11", "name": "B3", "parent_id": "3" },
     { "id": "12", "name": "C1", "parent_id": "4" },
+
+    { "id": "26", "name": "B1a", "parent_id": "9" },
+    { "id": "27", "name": "B1b", "parent_id": "9" },
+    { "id": "28", "name": "B2a", "parent_id": "10" },
+    { "id": "29", "name": "B2b", "parent_id": "10" },
+    { "id": "30", "name": "B2c", "parent_id": "10" },
+    { "id": "31", "name": "B3a", "parent_id": "11" },
+
+    { "id": "42", "name": "D1a", "parent_id": "15" },
+    { "id": "43", "name": "D1b", "parent_id": "15" },
+    { "id": "44", "name": "D2a", "parent_id": "16" },
+    { "id": "45", "name": "D2b", "parent_id": "16" },
+    { "id": "46", "name": "D2c", "parent_id": "16" },
+    { "id": "47", "name": "D3a", "parent_id": "17" },
+    { "id": "48", "name": "D3b", "parent_id": "17" },
+    { "id": "49", "name": "D3c", "parent_id": "17" },
+
+
+    { "id": "32", "name": "B3b", "parent_id": "11" },
+    { "id": "33", "name": "B3c", "parent_id": "11" },
+    { "id": "34", "name": "C1a", "parent_id": "12" },
+    { "id": "35", "name": "C1b", "parent_id": "12" },
+    { "id": "36", "name": "C2a", "parent_id": "13" },
+
+
+
     { "id": "13", "name": "C2", "parent_id": "4" },
     { "id": "14", "name": "C3", "parent_id": "4" },
     { "id": "15", "name": "D1", "parent_id": "5" },
@@ -24,35 +53,18 @@ let data = [
     { "id": "23", "name": "A3a", "parent_id": "8" },
     { "id": "24", "name": "A3b", "parent_id": "8" },
     { "id": "25", "name": "A3c", "parent_id": "8" },
-    { "id": "26", "name": "B1a", "parent_id": "9" },
-    { "id": "27", "name": "B1b", "parent_id": "9" },
-    { "id": "28", "name": "B2a", "parent_id": "10" },
-    { "id": "29", "name": "B2b", "parent_id": "10" },
-    { "id": "30", "name": "B2c", "parent_id": "10" },
-    { "id": "31", "name": "B3a", "parent_id": "11" },
-    { "id": "32", "name": "B3b", "parent_id": "11" },
-    { "id": "33", "name": "B3c", "parent_id": "11" },
-    { "id": "34", "name": "C1a", "parent_id": "12" },
-    { "id": "35", "name": "C1b", "parent_id": "12" },
-    { "id": "36", "name": "C2a", "parent_id": "13" },
+
     { "id": "37", "name": "C2b", "parent_id": "13" },
     { "id": "38", "name": "C2c", "parent_id": "13" },
     { "id": "39", "name": "C3a", "parent_id": "14" },
     { "id": "40", "name": "C3b", "parent_id": "14" },
     { "id": "41", "name": "C3c", "parent_id": "14" },
-    { "id": "42", "name": "D1a", "parent_id": "15" },
-    { "id": "43", "name": "D1b", "parent_id": "15" },
-    { "id": "44", "name": "D2a", "parent_id": "16" },
-    { "id": "45", "name": "D2b", "parent_id": "16" },
-    { "id": "46", "name": "D2c", "parent_id": "16" },
-    { "id": "47", "name": "D3a", "parent_id": "17" },
-    { "id": "48", "name": "D3b", "parent_id": "17" },
-    { "id": "49", "name": "D3c", "parent_id": "17" }
   ];
   
   
   let reversedData = data.reverse();
 
+ // console.log(reversedData)
 //   console.log("----",reversedData)
   
   let currentParents = ['0'];
@@ -63,7 +75,7 @@ let data = [
   
     currentParents.forEach((parentID) => {
 
-        let children = reversedData.filter((item) => item.parent_id === parentID);  
+        let children = data.filter((item) => item.parent_id === parentID);  
         
         children.forEach(ele => destArray.push(ele));
         
@@ -76,4 +88,7 @@ let data = [
   
   copyChildren(currentParents, destArray);
   console.log(JSON.stringify(destArray, null, 2));
+
+
+  console.log('----------------------------------------');
   
