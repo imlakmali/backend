@@ -60,28 +60,19 @@ let data = [
   
   function copyChildren(currentParents, destArray) {
 
-    let newParents = [];
   
     currentParents.forEach((parentID) => {
 
-      let children = reversedData.filter((item) => item.parent_id === parentID);
-  
-      children.forEach((child) => {
-        let newChild = {
-          id: child.id,
-          name: child.name,
-          children: [],
-        };
-        destArray.push(newChild);
-  
-        newParents.push(child.id);
-  
-        copyChildren(newParents, newChild.children);
+        let children = reversedData.filter((item) => item.parent_id === parentID);  
+        
+        children.forEach(ele => destArray.push(ele));
+        
+        copyChildren(children.map(ele => ele.id), destArray);
       });
-    });
-  
-    return newParents;
-  }
+
+      
+    }
+
   
   copyChildren(currentParents, destArray);
   console.log(JSON.stringify(destArray, null, 2));
