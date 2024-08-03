@@ -80,7 +80,7 @@ console.log(JSON.stringify(destArray, null , 2))
 
 function findChildren(parentId) {
 
-  // let result = [];
+  let result = [];
 
   data.forEach(item => {
 
