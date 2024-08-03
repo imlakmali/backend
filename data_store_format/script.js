@@ -1,4 +1,4 @@
-let linearData = [
+var linearData = [
     { "id": "24", "name": "A3b", "parent_id": "8" },
     { "id": "42", "name": "D1a", "parent_id": "15" },
     { "id": "15", "name": "D1", "parent_id": "5" },
@@ -53,15 +53,17 @@ let linearData = [
 ];
 
 
-function sortStructuredArrayByHierarchy(currentParents , destArray){
+
+function sortStructuredArrayByHierarchy(currentParents , sourceArray, destArray){
     
     currentParents.forEach(parentID => {
 
-        let children = linearData.filter(item=>item.parent_id === parentID);
+        let children = sourceArray.filter(item=>item.parent_id === parentID);
 
         children.forEach(element => destArray.push(element))
 
-       copyChild(children.map(element => element.id), destArray)
+        //Recussion
+        sortStructuredArrayByHierarchy(children.map(element => element.id), sourceArray, destArray)
 
         
     });
@@ -70,31 +72,102 @@ function sortStructuredArrayByHierarchy(currentParents , destArray){
 
 }
 
-function findChildren(parentId) {
 
-  let result = [];
 
-  data.forEach(item => {
+function findChildrenArrayOf(parentId, outputArray) {
 
-      if (item.parent_id === parentId) {
-          let child = {
-              id: item.id,
-              name: item.name,
-              children: findChildren(item.id) 
-          };
-          result.push(child);
-      }
-  });
-  return result;
+    return 'tested';
+
 }
 
 
+
+
 //Main Process ---------------
+function main() {
 
-let currentParents = ['0'];
-let sortedLinearData = [];
+    //Step 1 -----------
+    let sortedLinearData = [];
+    sortStructuredArrayByHierarchy(['0'], linearData, sortedLinearData)
 
-let hierarchy = findChildren("0");
-console.log(JSON.stringify(hierarchy, null, 2));
+
+
+
+    //Step 2 ---------
+    let output = {
+        id      : sortedLinearData[0].id,
+        name    : sortedLinearData[0].name,
+        children: []
+    };
+
+    sortedLinearArray.forEach((element, idx) => {
+
+
+        if (idx === 0)
+            return;
+
+        let childrenArray = findChildrenArrayOf(element.parentId, output);
+
+        childrenArray.push({
+            id      : element.id,
+            name    : element.name,
+            children: []
+        })
+
+    })
+
+
+//    let hierarchy = findChildren("0");
+   // console.log(JSON.stringify(sortedLinearData, null, 2));
+
+
+
+}
+
+function test() {
+
+    let sample = {
+        id: '0',
+        name: 'root',
+        children: [
+            {
+                id: '1',
+                name: 'a',
+                children: [                                            
+                    {
+                        id: '3',
+                        name: 'a1',
+                        children: [9999999999999999999]
+                    }
+                ]
+            },
+            {
+                id: '2',
+                name: 'b',
+                children: []
+            },
+            {
+                id: '3',
+                name: 'c',
+                children: []
+            }
+
+        ]
+    }
+
+    console.log(findChildrenArrayOf('3', sample))
+
+}
+
+//Startup
+//main();
+test()
+
+
+
+
+
+
+
 
 
