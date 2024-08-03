@@ -1,4 +1,4 @@
-let data = [
+let linearData = [
     { "id": "24", "name": "A3b", "parent_id": "8" },
     { "id": "42", "name": "D1a", "parent_id": "15" },
     { "id": "15", "name": "D1", "parent_id": "5" },
@@ -53,16 +53,11 @@ let data = [
 ];
 
 
-  let currentParents = ['0'];
-  let destArray = [];
-  
-function copyChild(currentParents , destArray){
+function sortStructuredArrayByHierarchy(currentParents , destArray){
     
-    // let newParents = [];
-
     currentParents.forEach(parentID => {
 
-        let children = data.filter(item=>item.parent_id === parentID);
+        let children = linearData.filter(item=>item.parent_id === parentID);
 
         children.forEach(element => destArray.push(element))
 
@@ -74,9 +69,6 @@ function copyChild(currentParents , destArray){
 
 
 }
-copyChild(currentParents,destArray)
-console.log(JSON.stringify(destArray, null , 2))
-
 
 function findChildren(parentId) {
 
@@ -96,6 +88,11 @@ function findChildren(parentId) {
   return result;
 }
 
+
+//Main Process ---------------
+
+let currentParents = ['0'];
+let sortedLinearData = [];
 
 let hierarchy = findChildren("0");
 console.log(JSON.stringify(hierarchy, null, 2));
