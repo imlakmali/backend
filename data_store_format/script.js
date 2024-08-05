@@ -75,15 +75,18 @@ function findChildrenArrayOf(parentId, outPutArray) {
 
         return outPutArray.children;
     }
-    let result = '';
-    outPutArray.children.forEach(child=>{
-        if(!result){
-            result= findChildrenArrayOf(parentId, child)
-        }
-    });
+    
+  
+    for (let child of outputArray.children) {
+
+        result = findChildrenArrayOf(parentId, child);
+
+        if (result)
+           return result;
+    }
 
 
-    return result;
+    return '';
 }
 
 
