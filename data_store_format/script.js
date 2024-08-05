@@ -69,7 +69,6 @@ function sortStructuredArrayByHierarchy(currentParents , sourceArray, destArray)
 
 }
 
-
 function findChildrenArrayOf(parentId, outPutArray) {
 
     if (outPutArray.id === parentId) {
@@ -86,6 +85,7 @@ function findChildrenArrayOf(parentId, outPutArray) {
 
     return result;
 }
+
 
 //  Main Process---
 function main(){
@@ -122,7 +122,7 @@ function main(){
 
 }
 
-// startup---
+// startup
 main();
 
 
