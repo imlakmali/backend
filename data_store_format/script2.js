@@ -51,16 +51,17 @@ let LinearData = [
     { "id": "12", "name": "C1", "parent_id": "4" },
     { "id": "27", "name": "B1b", "parent_id": "9" }
   ];
-    
+  
+  
 function sortStructuredArrayByHierarchy(currentParents , sourceArray, destArray){
   
     currentParents.forEach(parentID => {
 
-        let children = sourceArray.filter(item=>item.parent_id === parentID);
+        let children = LinearData.filter(item=>item.parent_id === parentID);
 
-        children.forEach(element => destArray.push(element))
+        children.forEach(element => sortedLinerData.push(element))
 
-        sortStructuredArrayByHierarchy(children.map(element => element.id), sourceArray, destArray)
+        sortStructuredArrayByHierarchy(children.map(element => element.id), destArray)
 
       
   });
@@ -69,60 +70,87 @@ function sortStructuredArrayByHierarchy(currentParents , sourceArray, destArray)
 
 }
 
-
 function findChildrenArrayOf(parentId, outPutArray) {
-
     if (outPutArray.id === parentId) {
-
         return outPutArray.children;
     }
-    let result = '';
-    outPutArray.children.forEach(child=>{
-        if(!result){
-            result= findChildrenArrayOf(parentId, child)
+    let result = null;
+    outPutArray.children.forEach(child => {
+        if (!result) {
+            result = findChildrenArrayOf(parentId, child);
         }
     });
-
-
     return result;
 }
 
+
+// function findChildren(parentId) {
+
+// let result = [];
+
+// data.forEach(item => {
+
+//     if (item.parent_id === parentId) {
+//         let child = {
+//             id: item.id,
+//             name: item.name,
+//             children: findChildren(item.id) 
+//         };
+//         result.push(child);
+//     }
+// });
+// return result;
+// }
+
+
 //  Main Process---
+
+
 function main(){
 
     // Step(01)---
         let sortedLinerData = [];
         sortStructuredArrayByHierarchy(['0'], LinearData, sortedLinerData)
         
-        
+        // let hierarchy = sortStructuredArrayByHierarchy("0");
+        // console.log(JSON.stringify(sortedLinerData, null, 2));
+    
+
     // Step(02)---
     let outPut = {
         id: sortedLinerData[0].id,
         name: sortedLinerData[0].name,
         children:[]
-    };
+    }
     sortedLinerData.forEach((element, idx )=>{
 
         if(idx === 0){
             return;
         }
-        let childrenArray = findChildrenArrayOf(element.parent_id, outPut);
+        let childrenArray = findChildrenArrayOf(element.parentId, outPut);
 
-        if(childrenArray){
-            childrenArray.push({
-                id: element.id,
-                name:element.name,
-                children:[]
-            })
-        }
-
+        childrenArray.push({
+            id: element.id,
+            name:element.name,
+            children:[]
+        })
     })
 
+
+
+
+
+    // copyChild(currentParents,destArray)
     console.log(JSON.stringify(outPut, null , 2))
+
+    
+
+
+
 
 }
 
-// startup---
+// startup
 main();
 
 
