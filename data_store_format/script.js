@@ -69,25 +69,30 @@ function sortStructuredArrayByHierarchy(currentParents , sourceArray, destArray)
 
 }
 
-function findChildrenArrayOf(parentId, outPutArray) {
+function findChildrenArray(parentId, ChildNode) {
 
-    if (outPutArray.id === parentId) {
+    if (ChildNode.id === parentId) {
 
-        return outPutArray.children;
+        return ChildNode.children;
     }
     
-  
-    for (let child of outputArray.children) {
 
-        result = findChildrenArrayOf(parentId, child);
+    ChildNode.children.some(child =>{
+        result = findChildrenArray(parentId,child);
+        return result;
+    });
 
-        if (result)
-           return result;
-    }
-
-
-    return '';
+ return result
 }
+
+function findMultipleChildrenArrays(parentIDs, node){
+    let result = [];
+
+    parentIDs.forEach(parentId =>{
+        result.push(findChildrenArray(parentId, node));
+    });
+    return result;
+} 
 
 
 //  Main Process---
@@ -109,7 +114,7 @@ function main(){
         if(idx === 0){
             return;
         }
-        let childrenArray = findChildrenArrayOf(element.parent_id, outPut);
+        let childrenArray = findChildrenArray(element.parent_id, outPut);
 
         if(childrenArray){
             childrenArray.push({
@@ -123,6 +128,8 @@ function main(){
 
     console.log(JSON.stringify(outPut, null , 2))
 
+    let allChidrenArray = findMultipleChildrenArrays(['5','7'], outPut)
+    console.log(allChidrenArray)
 }
 
 // startup
@@ -137,3 +144,6 @@ main();
     // Sort the array in a way that parents are found befor their children,
 // step(2)
     // Go through the sorted array and create eache record as achild in inside their respective parent element.
+
+ 
+    
