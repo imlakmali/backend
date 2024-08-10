@@ -1,4 +1,3 @@
-// My data---
 let LinearData = [
     { "id": "24", "name": "A3b", "parent_id": "8" },
     { "id": "42", "name": "D1a", "parent_id": "15" },
@@ -53,95 +52,102 @@ let LinearData = [
     { "id": "27", "name": "B1b", "parent_id": "9" }
   ];
 
+
 let completeRecursionsParentId = [];
 let recursionCount = 0;
-let globalChildren = [];
+let globalChildren = 
 
-// Convert flat data for structured---
-function sortStructuredArrayByHierarchy(currentParents, sourceArray, destArray) {
-
+    
+function sortStructuredArrayByHierarchy(currentParents , sourceArray, destArray){
+  
     currentParents.forEach(parentID => {
 
-        let children = sourceArray.filter(item => item.parent_id === parentID);
+        let children = sourceArray.filter(item=>item.parent_id === parentID);
 
-        children.forEach(element => destArray.push(element));
+        children.forEach(element => destArray.push(element))
 
-        sortStructuredArrayByHierarchy(children.map(element => element.id), sourceArray, destArray);
-    });
+        sortStructuredArrayByHierarchy(children.map(element => element.id), sourceArray, destArray)
+
+      
+  });
+
+
+
 }
-
 
 function findChildrenArray(parentId, ChildNode) {
 
+    recursionCount++;
+
+    
+
     if (ChildNode.id === parentId) {
 
-        recursionCount++;
         completeRecursionsParentId.push(parentId);
-
-        ChildNode.children.forEach(child => globalChildren.push(child));
-
         return ChildNode.children;
     }
+    
 
-    let result;
-    ChildNode.children.some(child => {
-
-        result = findChildrenArray(parentId, child);
-
+    ChildNode.children.some(child =>{
+         result = findChildrenArray(parentId,child);
         return result;
-    });
+    }); 
 
-    return result;
+
+ return result
 }
 
 
-function findChildrenArrayOf(parentIds, ChildNode) {
 
-    return parentIds.map(parentId => findChildrenArray(parentId, ChildNode));
-}
 
-// Main Process---
-function main() {
+//  Main Process---
+function main(){
+
     // Step(01)---
-
-    let sortedLinerData = [];
-    sortStructuredArrayByHierarchy(['0'], LinearData, sortedLinerData);
-
+        let sortedLinerData = [];
+        sortStructuredArrayByHierarchy(['0'], LinearData, sortedLinerData)
+        
+        
     // Step(02)---
     let outPut = {
-
         id: sortedLinerData[0].id,
         name: sortedLinerData[0].name,
-        children: []
-
+        children:[]
     };
 
-    sortedLinerData.forEach((element, idx) => {
+    sortedLinerData.forEach((element, idx )=>{
 
-        if (idx === 0) {
+        if(idx === 0){
             return;
         }
         let childrenArray = findChildrenArray(element.parent_id, outPut);
 
-        if (childrenArray) {
+        if(childrenArray){
             childrenArray.push({
                 id: element.id,
-                name: element.name,
-                children: []
-            });
+                name:element.name,
+                children:[]
+            })
         }
-    });
 
-    console.log(JSON.stringify(outPut, null, 2));
+    })
+
+
+    console.log(JSON.stringify(outPut, null , 2))
     console.log("Complete Recursions:", completeRecursionsParentId);
-    console.log("Recursion Count:", recursionCount);
-    console.log("Global Children after each recursion:", globalChildren);
+    console.log("Recursion Count:", recursionCount)
 
-    // Test---
-    let parentIds = [15, 17]; 
-    let allChildrenArrays = findChildrenArrayOf(parentIds, outPut);
-    console.log("All Children Arrays for multiple IDs:", allChildrenArrays);
 }
 
-// Startup
+// startup
 main();
+
+
+// Step (1)
+    // Sort the array in a way that parents are found befor their children,
+// step(2)
+    // Go through the sorted array and create eache record as a child in inside their respective parent element.
+//  step (3)
+    // 
+ 
+    
