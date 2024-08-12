@@ -86,14 +86,14 @@ function findChildrenArray(parentId, ChildNode) {
  return result
 }
 
-function findMultipleChildrenArrays(parentIDs, node){
-    let result = [];
+// function findMultipleChildrenArrays(parentIDs, node){
+//     let result = [];
 
-    parentIDs.forEach(parentId =>{
-        result.push(findChildrenArray(parentId, node));
-    });
-    return result;
-} 
+//     parentIDs.forEach(parentId =>{
+//         result.push(findChildrenArray(parentId, node));
+//     });
+//     return result;
+// } 
 
 
 //  Main Process---
@@ -131,17 +131,15 @@ function main(){
 
     console.log(JSON.stringify(outPut, null , 2))
 
-    let allChidrenArray = findMultipleChildrenArrays(['5','7'], outPut)
-    console.log("hgbfgdeuyfgiufgey",sortedLinerData)
 
-    console.log("+++++++++",LinearData.length)
-    console.log("Sdatalength",sortedLinerData.length)
+
+  
 }
 
 // startup
 let sortedLinerData = [];
 sortStructuredArrayByHierarchy(['0'], LinearData, sortedLinerData)
-console.log(sortedLinerData)
+
 
 
 // Step (1)

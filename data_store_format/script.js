@@ -53,6 +53,11 @@ let LinearData = [
     { "id": "27", "name": "B1b", "parent_id": "9" }
   ];
     
+  
+   
+
+//  console.log("parent ids", completeRecursionsParentId) 
+
   function sortStructuredArrayByHierarchy(currentParents, sourceArray, destArray) {
 
     currentParents.forEach(parentID => {
@@ -66,38 +71,24 @@ let LinearData = [
     });
 }
 
-function findChildrenArray(parentId, node) {
+function findChildrenArray(parentId, ChildNode) {
 
-    if (node.id === parentId) {
-        return node.children;
+    if (ChildNode.id === parentId) {
+
+        return ChildNode.children;
     }
+    
 
-    for (let child of node.children) {
-
-        let result = findChildrenArray(parentId, child);
-
-        if (result !== undefined) {
-
-            return result;
-        }
-    }
-    return undefined;
-}
-
-function findChildrenOfMultipleParents(parentIds, root) {
-
-    let result = [];
-
-    parentIds.forEach(parentId => {
-
-        let children = findChildrenArray(parentId, root);
-
-        result.push(children);
-
+    ChildNode.children.some(child =>{
+        result = findChildrenArray(parentId,child);
+        return result;
     });
 
-    return result;
+
+ return result
 }
+
+
 
 function main() {
     // Step (01) - Sort the flat data
@@ -126,66 +117,73 @@ function main() {
         }
     });
 
-    // Test the new function
-    function test() {
-        let sample = {
-            id: '0',
-            name: 'ROOT',
-            children: [
-                {
-                    id: '1',
-                    name: 'A',
-                    children: [
-                        {
-                            id: '5',
-                            name: 'A1',
-                            children: [
-                                {
-                                    id: '8',
-                                    name: 'A1a',
-                                    children: []
-                                }
-                            ]
-                        },
-                        {
-                            id: '6',
-                            name: 'A2',
-                            children: []
-                        },
-                        {
-                            id: '7',
-                            name: 'A3',
-                            children: []
-                        }
-                    ]
-                },
-                {
-                    id: '2',
-                    name: 'B',
-                    children: []
-                },
-                {
-                    id: '3',
-                    name: 'C',
-                    children: []
-                },
-                {
-                    id: '4',
-                    name: 'D',
-                    children: []
-                }
-            ]
-        };
-
-        let result = findChildrenOfMultipleParents(['1', '3'], sample);
-        console.log(JSON.stringify(result, null, 2));
-    }
-
-    test(); 
+    
+    
 }
 
 // Startup
 main();
+
+
+// test
+// function test() {
+
+//     let sample = {
+//         id: '0',
+//         name: 'ROOT',
+//         children: [
+//             {
+//                 id: '1',
+//                 name: 'A',
+//                 children: [
+//                     {
+//                         id: '5',
+//                         name: 'A1',
+//                         children: [
+//                             {
+//                                 id: '8',
+//                                 name: 'A1a',
+//                                 children: []
+//                             }
+//                         ]
+//                     },
+//                     {
+//                         id: '6',
+//                         name: 'A2',
+//                         children: []
+//                     },
+//                     {
+//                         id: '7',
+//                         name: 'A3',
+//                         children: []
+//                     }
+//                 ]
+//             },
+//             {
+//                 id: '2',
+//                 name: 'B',
+//                 children: []
+//             },
+//             {
+//                 id: '3',
+//                 name: 'C',
+//                 children: []
+//             },
+//             {
+//                 id: '4',
+//                 name: 'D',
+//                 children: []
+//             }
+//         ]
+//     };
+
+//     let result = findChildrenOfMultipleParents(['1', '3'], sample);
+//     console.log(JSON.stringify(result, null, 2));
+// }
+
+// test(); 
+
+
 
 
 
