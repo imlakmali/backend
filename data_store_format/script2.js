@@ -52,9 +52,10 @@ let LinearData = [
     { "id": "12", "name": "C1", "parent_id": "4" },
     { "id": "27", "name": "B1b", "parent_id": "9" }
   ];
-    
+
+
 function sortStructuredArrayByHierarchy(currentParents , sourceArray, destArray){
-  console.log("----",currentParents)
+  
     currentParents.forEach(parentID => {
 
         let children = sourceArray.filter(item=>item.parent_id === parentID);
@@ -131,11 +132,16 @@ function main(){
     console.log(JSON.stringify(outPut, null , 2))
 
     let allChidrenArray = findMultipleChildrenArrays(['5','7'], outPut)
-    console.log(allChidrenArray)
+    console.log("hgbfgdeuyfgiufgey",sortedLinerData)
+
+    console.log("+++++++++",LinearData.length)
+    console.log("Sdatalength",sortedLinerData.length)
 }
 
 // startup
-main();
+let sortedLinerData = [];
+sortStructuredArrayByHierarchy(['0'], LinearData, sortedLinerData)
+console.log(sortedLinerData)
 
 
 // Step (1)
@@ -155,3 +161,15 @@ main();
 // console.log(allChildrenArray)   //--->  [[], []]
 
 
+// function findMultipleChildrenArrays(parentIDs, node){
+//     let result = [];
+
+//     parentIDs.forEach(parentId =>{
+//         result.push(findChildrenArray(parentId, node));
+//     });
+//     return result;
+// } 
+
+
+    // let allChidrenArray = findMultipleChildrenArrays(['5','7'], outPut)
+    // console.log(allChidrenArray)
