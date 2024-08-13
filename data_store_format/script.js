@@ -25,7 +25,6 @@ let LinearData = [
     { "id": "25", "name": "A3c", "parent_id": "8" },
     { "id": "12", "name": "C1", "parent_id": "4" },
     { "id": "44", "name": "D2a", "parent_id": "16" },
-    { "id": "22", "name": "A2c", "parent_id": "7" },
     { "id": "41", "name": "C3c", "parent_id": "14" },
     { "id": "8", "name": "A3", "parent_id": "2" },
     { "id": "47", "name": "D3a", "parent_id": "17" },
@@ -49,14 +48,14 @@ let LinearData = [
     { "id": "3", "name": "B", "parent_id": "1" },
     { "id": "7", "name": "A2", "parent_id": "2" },
     { "id": "21", "name": "A2b", "parent_id": "7" },
-    { "id": "12", "name": "C1", "parent_id": "4" },
     { "id": "27", "name": "B1b", "parent_id": "9" }
   ];
-    
-  
    
+  
+  let foundParentId = [];
+  let count = 0;
+  let foundChildren = [];
 
-//  console.log("parent ids", completeRecursionsParentId) 
 
   function sortStructuredArrayByHierarchy(currentParents, sourceArray, destArray) {
 
@@ -71,32 +70,54 @@ let LinearData = [
     });
 }
 
-function findChildrenArray(parentId, ChildNode) {
 
-    if (ChildNode.id === parentId) {
-
-        return ChildNode.children;
-    }
+function findChildrenArray(parentIds, ChildNode) {
     
+    parentIds.forEach(parentId=>{
+        
+        if(ChildNode.id === parentId){
 
-    ChildNode.children.some(child =>{
-        result = findChildrenArray(parentId,child);
-        return result;
+            foundParentId.push(ChildNode.id)
+            count++;
+            foundChildren.push(...ChildNode.children)
+
+        };
+
     });
 
+    if(count === parentIds.length){
 
- return result
+        return;
+
+    }
+
+    if(ChildNode.children){
+        
+        ChildNode.children.forEach(child=>{
+
+            findChildrenArray(parentIds,child);
+
+            if(count=== parentIds.length){
+                return;
+            }
+
+        })
+
+    }
+ 
 }
 
-
-
 function main() {
+    
+ 
     // Step (01) - Sort the flat data
     let sortedLinearData = [];
     sortStructuredArrayByHierarchy(['0'], LinearData, sortedLinearData);
+    // console.log("Sorted data:", sortedLinearData);
     
+
     // Step (02) - Convert sorted data to hierarchical format
-    let output = {
+    let root = {
         id: sortedLinearData[0].id,
         name: sortedLinearData[0].name,
         children: []
@@ -106,7 +127,7 @@ function main() {
         if (idx === 0) {
             return;
         }
-        let childrenArray = findChildrenArray(element.parent_id, output);
+        let childrenArray = findChildrenArray([element.parent_id], root);
 
         if (childrenArray) {
             childrenArray.push({
@@ -116,6 +137,7 @@ function main() {
             });
         }
     });
+
 
     
     

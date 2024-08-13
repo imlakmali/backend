@@ -86,14 +86,6 @@ function findChildrenArray(parentId, ChildNode) {
  return result
 }
 
-// function findMultipleChildrenArrays(parentIDs, node){
-//     let result = [];
-
-//     parentIDs.forEach(parentId =>{
-//         result.push(findChildrenArray(parentId, node));
-//     });
-//     return result;
-// } 
 
 
 //  Main Process---
@@ -137,6 +129,7 @@ function main(){
 }
 
 // startup
+main()
 let sortedLinerData = [];
 sortStructuredArrayByHierarchy(['0'], LinearData, sortedLinerData)
 
@@ -158,16 +151,3 @@ sortStructuredArrayByHierarchy(['0'], LinearData, sortedLinerData)
 
 // console.log(allChildrenArray)   //--->  [[], []]
 
-
-// function findMultipleChildrenArrays(parentIDs, node){
-//     let result = [];
-
-//     parentIDs.forEach(parentId =>{
-//         result.push(findChildrenArray(parentId, node));
-//     });
-//     return result;
-// } 
-
-
-    // let allChidrenArray = findMultipleChildrenArrays(['5','7'], outPut)
-    // console.log(allChidrenArray)
