@@ -15,7 +15,6 @@ let LinearData = [
     { "id": "13", "name": "C2", "parent_id": "4" },
     { "id": "40", "name": "C3b", "parent_id": "14" },
     { "id": "29", "name": "B2b", "parent_id": "10" },
-    { "id": "27", "name": "B1b", "parent_id": "9" },
     { "id": "10", "name": "B2", "parent_id": "3" },
     { "id": "6", "name": "A1", "parent_id": "2" },
     { "id": "19", "name": "A1b", "parent_id": "6" },
@@ -27,7 +26,6 @@ let LinearData = [
     { "id": "44", "name": "D2a", "parent_id": "16" },
     { "id": "41", "name": "C3c", "parent_id": "14" },
     { "id": "8", "name": "A3", "parent_id": "2" },
-    { "id": "47", "name": "D3a", "parent_id": "17" },
     { "id": "5", "name": "D", "parent_id": "1" },
     { "id": "20", "name": "A2a", "parent_id": "7" },
     { "id": "38", "name": "C2c", "parent_id": "13" },
@@ -51,11 +49,9 @@ let LinearData = [
     { "id": "27", "name": "B1b", "parent_id": "9" }
   ];
    
-  
-  let foundParentId = [];
-  let count = 0;
   let foundChildren = [];
-
+  let count = 0;
+  
 
   function sortStructuredArrayByHierarchy(currentParents, sourceArray, destArray) {
 
@@ -66,14 +62,13 @@ let LinearData = [
         children.forEach(element => destArray.push(element));
 
         sortStructuredArrayByHierarchy(children.map(element => element.id), sourceArray, destArray);
-
     });
+
 }
 
 
 function findChildrenArray(parentIds, ChildNode) {
-    
-
+   
     for(let i = 0; i< parentIds.length; i++){
 
         let parentId = parentIds[i];
@@ -84,17 +79,11 @@ function findChildrenArray(parentIds, ChildNode) {
             foundChildren.push(ChildNode.children)
             if(count === parentIds.length){
 
-                return;
-        
+                return foundChildren;
             }
-
         };
-
-
-        
     }
  
-
     if(ChildNode.children){
         
         ChildNode.children.forEach(child=>{
@@ -112,8 +101,8 @@ function main() {
  
     // Step (01) - Sort the flat data
     let sortedLinearData = [];
-    sortStructuredArrayByHierarchy(['0'], LinearData, sortedLinearData);
-     console.log("Sorted data:", sortedLinearData);
+    sortStructuredArrayByHierarchy(['1'], LinearData, sortedLinearData);
+    console.log("Sorted data:", sortedLinearData);
     
 
     // Step (02) - Convert sorted data to hierarchical format
@@ -127,98 +116,92 @@ function main() {
         if (idx === 0) {
             return;
         }
-        let childrenArray = findChildrenArray([element.parent_id],hierarchicalData);
+        let childrenArrays = findChildrenArray([element.parent_id],hierarchicalData);
+        
 
-        if (childrenArray) {
-            childrenArray.push({
+        if (childrenArrays.length) {
+            childrenArrays[0].push({
                 id: element.id,
                 name: element.name,
                 children: []
             });
         }
     });
-    // step (03)
-let parentIDToShow = ['6','9','4'];
 
-findChildrenArray(parentIDToShow,);
-console.log("Parent IDs to Show:", parentIDToShow);
-console.log("Found Children:", foundChildren);
-    
-    
+
+
+    // step (03)
+   
 }
 
 // Startup
-// main();
-
-
-
-
+ main();
 
 
 // test
-function test() {
+// function test() {
 
-    let sample = {
-        id: '0',
-        name: 'ROOT',
-        children: [
-            {
-                id: '1',
-                name: 'A',
-                children: [
-                    {
-                        id: '5',
-                        name: 'A1',
-                        children: [
-                            {
-                                id: '8',
-                                name: 'A1a',
-                                children: []
-                            }
-                        ]
-                    },
-                    {
-                        id: '6',
-                        name: 'A2',
-                        children: [6666]
-                    },
-                    {
-                        id: '7',
-                        name: 'A3',
-                        children: [999999]
-                    }
-                ]
-            },
-            {
-                id: '2',
-                name: 'B',
-                children: [{           
-                    id: '8',
-                    name: 'B1',
-                    children: [555555]}]
-            },
-            {
-                id: '3',
-                name: 'C',
-                children: []
-            },
-            {
-                id: '4',
-                name: 'D',
-                children: []
-            }
-        ]
-    };
+//     let sample = {
+//         id: '0',
+//         name: 'ROOT',
+//         children: [
+//             {
+//                 id: '1',
+//                 name: 'A',
+//                 children: [
+//                     {
+//                         id: '5',
+//                         name: 'A1',
+//                         children: [
+//                             {
+//                                 id: '8',
+//                                 name: 'A1a',
+//                                 children: []
+//                             }
+//                         ]
+//                     },
+//                     {
+//                         id: '6',
+//                         name: 'A2',
+//                         children: [6666]
+//                     },
+//                     {
+//                         id: '7',
+//                         name: 'A3',
+//                         children: [999999]
+//                     }
+//                 ]
+//             },
+//             {
+//                 id: '2',
+//                 name: 'B',
+//                 children: [{           
+//                     id: '8',
+//                     name: 'B1',
+//                     children: [555555]}]
+//             },
+//             {
+//                 id: '3',
+//                 name: 'C',
+//                 children: []
+//             },
+//             {
+//                 id: '4',
+//                 name: 'D',
+//                 children: []
+//             }
+//         ]
+//     };
 
     
     
-    findChildrenArray(['1', '2'], sample);
-    console.log('Test 1:', foundChildren);
+//     findChildrenArray(['1', '2'], sample);
+//     console.log('Test 1:', foundChildren);
 
 
-}
+// }
 
-test(); 
+// test(); 
 
 
 
