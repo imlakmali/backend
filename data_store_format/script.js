@@ -149,7 +149,7 @@ console.log("Found Children:", foundChildren);
 
 // Startup
 // main();
-test();
+
 
 
 
@@ -192,7 +192,10 @@ function test() {
             {
                 id: '2',
                 name: 'B',
-                children: [222222]
+                children: [{           
+                    id: '8',
+                    name: 'B1',
+                    children: [555555]}]
             },
             {
                 id: '3',
