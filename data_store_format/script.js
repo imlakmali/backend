@@ -73,33 +73,33 @@ let LinearData = [
 
 function findChildrenArray(parentIds, ChildNode) {
     
-    parentIds.forEach(parentId=>{
-        
+
+    for(let i = 0; i< parentIds.length; i++){
+
+        let parentId = parentIds[i];
+
         if(ChildNode.id === parentId){
 
-            foundParentId.push(ChildNode.id)
             count++;
-            foundChildren.push(...ChildNode.children)
+            foundChildren.push(ChildNode.children)
+            if(count === parentIds.length){
+
+                return;
+        
+            }
 
         };
 
-    });
 
-    if(count === parentIds.length){
-
-        return;
-
+        
     }
+ 
 
     if(ChildNode.children){
         
         ChildNode.children.forEach(child=>{
 
             findChildrenArray(parentIds,child);
-
-            if(count=== parentIds.length){
-                return;
-            }
 
         })
 
@@ -108,16 +108,16 @@ function findChildrenArray(parentIds, ChildNode) {
 }
 
 function main() {
-    
+
  
     // Step (01) - Sort the flat data
     let sortedLinearData = [];
     sortStructuredArrayByHierarchy(['0'], LinearData, sortedLinearData);
-    // console.log("Sorted data:", sortedLinearData);
+     console.log("Sorted data:", sortedLinearData);
     
 
     // Step (02) - Convert sorted data to hierarchical format
-    let root = {
+    let hierarchicalData = {
         id: sortedLinearData[0].id,
         name: sortedLinearData[0].name,
         children: []
@@ -127,7 +127,7 @@ function main() {
         if (idx === 0) {
             return;
         }
-        let childrenArray = findChildrenArray([element.parent_id], root);
+        let childrenArray = findChildrenArray([element.parent_id],hierarchicalData);
 
         if (childrenArray) {
             childrenArray.push({
@@ -137,89 +137,85 @@ function main() {
             });
         }
     });
+    // step (03)
+let parentIDToShow = ['6','9','4'];
 
-
+findChildrenArray(parentIDToShow,);
+console.log("Parent IDs to Show:", parentIDToShow);
+console.log("Found Children:", foundChildren);
     
     
 }
 
 // Startup
-main();
+// main();
+test();
+
+
+
 
 
 // test
-// function test() {
+function test() {
 
-//     let sample = {
-//         id: '0',
-//         name: 'ROOT',
-//         children: [
-//             {
-//                 id: '1',
-//                 name: 'A',
-//                 children: [
-//                     {
-//                         id: '5',
-//                         name: 'A1',
-//                         children: [
-//                             {
-//                                 id: '8',
-//                                 name: 'A1a',
-//                                 children: []
-//                             }
-//                         ]
-//                     },
-//                     {
-//                         id: '6',
-//                         name: 'A2',
-//                         children: []
-//                     },
-//                     {
-//                         id: '7',
-//                         name: 'A3',
-//                         children: []
-//                     }
-//                 ]
-//             },
-//             {
-//                 id: '2',
-//                 name: 'B',
-//                 children: []
-//             },
-//             {
-//                 id: '3',
-//                 name: 'C',
-//                 children: []
-//             },
-//             {
-//                 id: '4',
-//                 name: 'D',
-//                 children: []
-//             }
-//         ]
-//     };
+    let sample = {
+        id: '0',
+        name: 'ROOT',
+        children: [
+            {
+                id: '1',
+                name: 'A',
+                children: [
+                    {
+                        id: '5',
+                        name: 'A1',
+                        children: [
+                            {
+                                id: '8',
+                                name: 'A1a',
+                                children: []
+                            }
+                        ]
+                    },
+                    {
+                        id: '6',
+                        name: 'A2',
+                        children: [6666]
+                    },
+                    {
+                        id: '7',
+                        name: 'A3',
+                        children: [999999]
+                    }
+                ]
+            },
+            {
+                id: '2',
+                name: 'B',
+                children: [222222]
+            },
+            {
+                id: '3',
+                name: 'C',
+                children: []
+            },
+            {
+                id: '4',
+                name: 'D',
+                children: []
+            }
+        ]
+    };
 
-//     let result = findChildrenOfMultipleParents(['1', '3'], sample);
-//     console.log(JSON.stringify(result, null, 2));
-// }
-
-// test(); 
-
+    
+    
+    findChildrenArray(['1', '2'], sample);
+    console.log('Test 1:', foundChildren);
 
 
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
+test(); 
 
 
 
