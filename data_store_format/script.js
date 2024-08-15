@@ -112,6 +112,8 @@ function main() {
         children: []
     };
 
+   
+
     sortedLinearData.forEach((element, idx) => {
         if (idx === 0) {
             return;
@@ -126,16 +128,14 @@ function main() {
                 children: []
             });
         }
+      
     });
-
-
-
-    // step (03)
    
 }
 
 // Startup
  main();
+
 
 
 // test
