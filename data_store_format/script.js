@@ -48,7 +48,10 @@ let LinearData = [
     { "id": "21", "name": "A2b", "parent_id": "7" },
     { "id": "27", "name": "B1b", "parent_id": "9" }
   ];
-   
+  
+  console.log("LinearData length",LinearData.length)
+
+
   let foundChildren = [];
   let count = 0;
   
@@ -101,9 +104,9 @@ function main() {
  
     // Step (01) - Sort the flat data
     let sortedLinearData = [];
-    sortStructuredArrayByHierarchy(['1'], LinearData, sortedLinearData);
+    sortStructuredArrayByHierarchy(['0'], LinearData, sortedLinearData);
     console.log("Sorted data:", sortedLinearData);
-    
+    console.log("sorted data length",sortedLinearData.length) 
 
     // Step (02) - Convert sorted data to hierarchical format
     let hierarchicalData = {
@@ -128,10 +131,13 @@ function main() {
                 children: []
             });
         }
-      
+        
     });
-   
+    
 }
+
+
+
 
 // Startup
  main();
