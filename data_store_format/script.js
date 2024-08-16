@@ -49,14 +49,12 @@ let LinearData = [
     { "id": "27", "name": "B1b", "parent_id": "9" }
   ];
 
-  console.log("LinearData length",LinearData.length)
-
 
   let foundChildren = [];
   let count = 0;
   
 
-  function sortStructuredArrayByHierarchy(currentParents, sourceArray, destArray) {
+function sortStructuredArrayByHierarchy(currentParents, sourceArray, destArray) {
 
     currentParents.forEach(parentID => {
 
@@ -66,7 +64,6 @@ let LinearData = [
 
         sortStructuredArrayByHierarchy(children.map(element => element.id), sourceArray, destArray);
     });
-
 }
 
 
@@ -76,14 +73,13 @@ function findChildrenArray(parentIds, ChildNode) {
 
         let parentId = parentIds[i];
 
-        console.log(`Checking ChildNode.id: ${ChildNode.id} against parentId: ${parentId}`);
-
+        // console.log(`Checking ChildNode.id: ${ChildNode.id} against parentId: ${parentId}`);
 
         if(ChildNode.id === parentId){
 
             count++;
 
-            console.log(`Count increased to: ${count}`);
+            //  console.log(`Count increased to: ${count}`);
 
             foundChildren.push(ChildNode.children)
 
@@ -96,11 +92,18 @@ function findChildrenArray(parentIds, ChildNode) {
  
     if(ChildNode.children){
         
-        ChildNode.children.forEach(child=>{
 
-            findChildrenArray(parentIds,child);
+        for(let i=0; i< ChildNode.children.length; i++){
+           
 
-        })
+                let returnArray = findChildrenArray(parentIds,ChildNode.children[i]);
+    
+                if(count === parentIds.length){
+    
+                    return returnArray;
+                }
+      
+        }
 
     }
  
@@ -112,8 +115,8 @@ function main() {
     // Step (01) - Sort the flat data
     let sortedLinearData = [];
     sortStructuredArrayByHierarchy(['0'], LinearData, sortedLinearData);
-    console.log("Sorted data:", sortedLinearData);
-    console.log("sorted data length",sortedLinearData.length) 
+    // console.log("Sorted data:", sortedLinearData);
+    
 
     // Step (02) - Convert sorted data to hierarchical format
     let hierarchicalData = {
@@ -134,7 +137,7 @@ function main() {
 
         let childrenArrays = findChildrenArray([element.parent_id],hierarchicalData);
         
-        console.log(element.parent_id);
+        // console.log(element.parent_id);
         
         if (childrenArrays.length) {
             childrenArrays[0].push({
@@ -145,6 +148,10 @@ function main() {
         }
         
     });
+
+    console.log(JSON.stringify(hierarchicalData, null, 2));
+    // findChildrenArray(['1', '2'], hierarchicalData);
+    // console.log('Test 1:', foundChildren);
     
 }
 
