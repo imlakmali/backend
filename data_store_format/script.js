@@ -48,7 +48,7 @@ let LinearData = [
     { "id": "21", "name": "A2b", "parent_id": "7" },
     { "id": "27", "name": "B1b", "parent_id": "9" }
   ];
-  
+
   console.log("LinearData length",LinearData.length)
 
 
@@ -76,10 +76,17 @@ function findChildrenArray(parentIds, ChildNode) {
 
         let parentId = parentIds[i];
 
+        console.log(`Checking ChildNode.id: ${ChildNode.id} against parentId: ${parentId}`);
+
+
         if(ChildNode.id === parentId){
 
             count++;
+
+            console.log(`Count increased to: ${count}`);
+
             foundChildren.push(ChildNode.children)
+
             if(count === parentIds.length){
 
                 return foundChildren;
@@ -121,9 +128,14 @@ function main() {
         if (idx === 0) {
             return;
         }
+
+        foundChildren = [];
+        count = 0;
+
         let childrenArrays = findChildrenArray([element.parent_id],hierarchicalData);
         
-
+        console.log(element.parent_id);
+        
         if (childrenArrays.length) {
             childrenArrays[0].push({
                 id: element.id,
