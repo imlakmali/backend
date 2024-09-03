@@ -6,26 +6,26 @@ type linkedItem = {
 };
 
 class LinkedList {
-    private items: linkedItem[] = [];
+     itemsArray: linkedItem[] = [];
 
-    
-    addRoot(value: string, id: number) {
-        const rootItem: linkedItem = {
-            id: id,
-            value: value,
-            previous: null
-        };
-        this.items.push(rootItem);
+
+    constructor( myId: number, myValue: string, myPrevious:number) {
+        this.itemsArray.push({id:myId, value:myValue, previous:myPrevious });
     }
 
-    addElement(id: number, value: string, previous: number){
-        const newItem : linkedItem = {
-            id= id,
-            value: value,
-            previous: previous
-            
-        }
-        this.items.push(newItem);
+
+    addElement(myId: number, myValue: string, myPrevious:number){
+       this.itemsArray.push({id:myId, value:myValue, previous:myPrevious })
+    }
+
+    getElement(myId: number){
+        return this.itemsArray[myId-1];
     }
 
 }
+
+let myLinkedList = new LinkedList(1,"Lak", 0);
+myLinkedList.addElement(2, "kamal" , 1);
+myLinkedList.addElement(3, "mal" , 2);
+
+console.log(myLinkedList.getElement(1))
