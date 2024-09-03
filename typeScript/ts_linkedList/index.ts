@@ -22,10 +22,16 @@ class LinkedList {
         return this.itemsArray[myId-1];
     }
 
+    displayList(){
+        console.log(this.itemsArray);
+    }
+
 }
 
 let myLinkedList = new LinkedList(1,"Lak", 0);
 myLinkedList.addElement(2, "kamal" , 1);
 myLinkedList.addElement(3, "mal" , 2);
+myLinkedList.displayList();
 
 console.log(myLinkedList.getElement(1))
+

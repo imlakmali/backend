@@ -9,9 +9,13 @@ var LinkedList = /** @class */ (function () {
     LinkedList.prototype.getElement = function (myId) {
         return this.itemsArray[myId - 1];
     };
+    LinkedList.prototype.displayList = function () {
+        console.log(this.itemsArray);
+    };
     return LinkedList;
 }());
 var myLinkedList = new LinkedList(1, "Lak", 0);
 myLinkedList.addElement(2, "kamal", 1);
 myLinkedList.addElement(3, "mal", 2);
+myLinkedList.displayList();
 console.log(myLinkedList.getElement(1));
