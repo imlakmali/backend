@@ -1,21 +1,21 @@
 var LinkedList = /** @class */ (function () {
-    function LinkedList(myId, myValue, myPrevious) {
+    function LinkedList(myValue, myId) {
         this.itemsArray = [];
-        this.itemsArray.push({ id: myId, value: myValue, previous: myPrevious });
+        this.itemsArray.push({ value: myValue, id: myId, previous: null });
     }
-    LinkedList.prototype.addElement = function (myId, myValue, myPrevious) {
+    LinkedList.prototype.addElement = function (myValue, myId, myPrevious) {
         this.itemsArray.push({ id: myId, value: myValue, previous: myPrevious });
     };
-    LinkedList.prototype.getElement = function (myId) {
-        return this.itemsArray[myId - 1];
-    };
+    // getElement(myId: number){
+    //     return this.itemsArray[myId-1];
+    // }
     LinkedList.prototype.displayList = function () {
         console.log(this.itemsArray);
     };
     return LinkedList;
 }());
-var myLinkedList = new LinkedList(1, "Lak", 0);
-myLinkedList.addElement(2, "kamal", 1);
-myLinkedList.addElement(3, "mal", 2);
+var myLinkedList = new LinkedList("Lakmali", 1);
+myLinkedList.addElement("Methmini", 101, 1);
+myLinkedList.addElement("Tharush", 290, 101);
 myLinkedList.displayList();
-console.log(myLinkedList.getElement(1));
+// console.log(myLinkedList.getElement(1));
