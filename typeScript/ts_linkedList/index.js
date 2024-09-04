@@ -1,31 +1,20 @@
-var LinkedList = /** @class */ (function () {
-    function LinkedList(myValue, myId) {
-        this.itemsArray = [];
-        this.itemsArray.push({ value: myValue, id: myId, previous: null });
+// type linkedItem = {
+//     value: string;
+//     id: number;
+//     previous: number | null;
+// };
+var Foo = /** @class */ (function () {
+    function Foo() {
+        this.x = [];
     }
-    LinkedList.prototype.addElement = function (myValue, myId, myPrevious) {
-        this.itemsArray.push({ value: myValue, id: myId, previous: myPrevious });
+    Foo.prototype.test = function () {
+        this.x.push({ value: 'foo', id: 0, previous: 0 });
+        var myItem = this.x.find(function (x) {
+            return x.value === 'foo';
+        });
+        console.log(myItem);
     };
-    LinkedList.prototype.getLink = function () {
-        var linkPath = [];
-        var currentItemId = this.itemsArray[0].id;
-        while (currentItemId !== null) {
-            for (var i = 0; i < this.itemsArray.length; i++) {
-                if (this.itemsArray[i].id === currentItemId) {
-                    linkPath.push(this.itemsArray[i].value);
-                    currentItemId = this.itemsArray[i].previous;
-                }
-            }
-        }
-        return linkPath.join("--->");
-    };
-    LinkedList.prototype.displayList = function () {
-        console.log(this.itemsArray);
-    };
-    return LinkedList;
+    return Foo;
 }());
-var myLinkedList = new LinkedList("Lakmali", 1);
-myLinkedList.addElement("Methmini", 101, 1);
-myLinkedList.addElement("Tharush", 290, 101);
-// myLinkedList.displayList();
-console.log(myLinkedList.getLink());
+var foo = new Foo();
+foo.test();
