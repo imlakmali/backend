@@ -4,11 +4,21 @@ var LinkedList = /** @class */ (function () {
         this.itemsArray.push({ value: myValue, id: myId, previous: null });
     }
     LinkedList.prototype.addElement = function (myValue, myId, myPrevious) {
-        this.itemsArray.push({ id: myId, value: myValue, previous: myPrevious });
+        this.itemsArray.push({ value: myValue, id: myId, previous: myPrevious });
     };
-    // getElement(myId: number){
-    //     return this.itemsArray[myId-1];
-    // }
+    LinkedList.prototype.getLink = function () {
+        var linkPath = [];
+        var currentItemId = this.itemsArray[0].id;
+        while (currentItemId !== null) {
+            for (var i = 0; i < this.itemsArray.length; i++) {
+                if (this.itemsArray[i].id === currentItemId) {
+                    linkPath.push(this.itemsArray[i].value);
+                    currentItemId = this.itemsArray[i].previous;
+                }
+            }
+        }
+        return linkPath.join("--->");
+    };
     LinkedList.prototype.displayList = function () {
         console.log(this.itemsArray);
     };
@@ -17,5 +27,5 @@ var LinkedList = /** @class */ (function () {
 var myLinkedList = new LinkedList("Lakmali", 1);
 myLinkedList.addElement("Methmini", 101, 1);
 myLinkedList.addElement("Tharush", 290, 101);
-myLinkedList.displayList();
-// console.log(myLinkedList.getElement(1));
+// myLinkedList.displayList();
+console.log(myLinkedList.getLink());
