@@ -5,48 +5,45 @@ type linkedItem = {
     previous: number | null;
 };
 
+
+
 class LinkedList {
      itemsArray: linkedItem[] = [];
      
+// Add root element using constuctor
 
     constructor( myValue: string, myId: number) {
         this.itemsArray.push({ value:myValue, id:myId, previous : null});
     }
 
 
-    addElement(myValue: string, myId: number,  myPrevious:number){
-       this.itemsArray.push({ value:myValue, id:myId, previous:myPrevious })
+// Add element for Array
+
+    addElement(myValue: string, myId: number,  myPreviousId:number){
+
+       this.itemsArray.push({ value:myValue, id:myId, previous:myPreviousId})
+
     }
 
-    getLink(myValue:string){
+
+// Get Link for values
+
+    getLink(myValue:string):string{
 
         let linkPath: string[]= [];
-        let currentItem = this.itemsArray.find(item =>{
-            item.value === myValue
-    })
+        let currentItem = this.itemsArray.find(item => item.value === myValue);
 
     if(!currentItem){
       return `Item with value "${myValue}" not found`
     }
 
-      let currentItemId = currentItem?.id;
+      while(currentItem ){
 
-      while(currentItemId !== null){
-
-        if(!currentItem){
-          return `Item with value "${myValue}" not found`
-        }
-        
         linkPath.push(currentItem.value);
-
-        currentItem = this.itemsArray.find(item =>{
-          item.id = currentItem?.previous
-        });
-        currentItemId = currentItem ? currentItem.id : null;
-      }
-
-      
+        currentItem = this.itemsArray.find(item => item.id === currentItem?.previous);
         
+      }
+ 
       return linkPath.reverse().join(" ---> ");  
     }
 
@@ -61,7 +58,10 @@ myLinkedList.addElement("Methmini", 101,1);
 myLinkedList.addElement("Tharush", 290, 101);
 myLinkedList.displayList();
 
-console.log(myLinkedList.getLink("lakmali"));
+
+console.log(myLinkedList.getLink("Lakmali"));
+console.log(myLinkedList.getLink("Methmini"));
+console.log(myLinkedList.getLink("Tharush"));
 
 
 
