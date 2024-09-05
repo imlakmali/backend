@@ -1,0 +1,13 @@
+cd \
+cd work
+cd backend
+cd..
+cd typescript
+cd ts_linkedList
+ code .
+tsc index.ts
+tsc --init
+tsc --version
+tsc index.ts
+doskey /history
+doskey /history > history.txt
