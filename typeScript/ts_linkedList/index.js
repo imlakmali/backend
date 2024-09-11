@@ -36,12 +36,47 @@ class LinkedList {
         console.log(this.itemsArray);
     }
 }
-let myLinkedList = new LinkedList("Lakmali", 1);
-myLinkedList.addElement("Methmini", 101, 1);
-myLinkedList.addElement("Tharush", 290, 101);
-myLinkedList.displayList();
-console.log(myLinkedList.getLink("Lakmali", "Methmini"));
-console.log(myLinkedList.getLink("Methmini", "Lakmali"));
-console.log(myLinkedList.getLink("Tharush", "Methmini"));
-console.log(myLinkedList.getLink("Lakmali", "Tharush"));
-console.log(myLinkedList.getLink("Tharush", "Lakmali"));
+class Stack {
+    constructor() {
+        this.numberArray = [];
+        this.numberArray = [];
+    }
+    push(element) {
+        this.numberArray.push(element);
+        console.log(`Pushed : ${element}`);
+    }
+    pop() {
+        const item = this.numberArray.splice(this.numberArray.length - 1, 1);
+        console.log(`Poped: ${item}`);
+    }
+    forcePop(index) {
+        let idx = index - 1;
+        const item = this.numberArray.splice(idx, this.numberArray.length - idx);
+        console.log(`Poped Items: ${item}`);
+    }
+    displayNumberArray() {
+        return this.numberArray;
+    }
+}
+let stack = new Stack();
+stack.push(1);
+stack.push(5);
+stack.push(7);
+stack.push(3);
+stack.push(9);
+stack.push(23);
+stack.push(7);
+stack.push(10);
+stack.push(11);
+console.log(stack.displayNumberArray());
+stack.forcePop(7);
+console.log(stack.displayNumberArray());
+// let myLinkedList = new LinkedList("Lakmali", 1);
+// myLinkedList.addElement("Methmini", 101,1);
+// myLinkedList.addElement("Tharush", 290, 101);
+// myLinkedList.displayList();
+// console.log(myLinkedList.getLink("Lakmali", "Methmini"));
+// console.log(myLinkedList.getLink("Methmini", "Lakmali"));
+// console.log(myLinkedList.getLink("Tharush", "Methmini"));
+// console.log(myLinkedList.getLink("Lakmali", "Tharush"));
+// console.log(myLinkedList.getLink("Tharush", "Lakmali"));
