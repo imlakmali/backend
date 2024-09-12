@@ -36,6 +36,15 @@ class LinkedList {
         console.log(this.itemsArray);
     }
 }
+// let myLinkedList = new LinkedList("Lakmali", 1);
+// myLinkedList.addElement("Methmini", 101,1);
+// myLinkedList.addElement("Tharush", 290, 101);
+// myLinkedList.displayList();
+// console.log(myLinkedList.getLink("Lakmali", "Methmini"));
+// console.log(myLinkedList.getLink("Methmini", "Lakmali"));
+// console.log(myLinkedList.getLink("Tharush", "Methmini"));
+// console.log(myLinkedList.getLink("Lakmali", "Tharush"));
+// console.log(myLinkedList.getLink("Tharush", "Lakmali"));
 class Stack {
     constructor() {
         this.numberArray = [];
@@ -58,25 +67,25 @@ class Stack {
         return this.numberArray;
     }
 }
-let stack = new Stack();
-stack.push(1);
-stack.push(5);
-stack.push(7);
-stack.push(3);
-stack.push(9);
-stack.push(23);
-stack.push(7);
-stack.push(10);
-stack.push(11);
-console.log(stack.displayNumberArray());
-stack.forcePop(7);
-console.log(stack.displayNumberArray());
-// let myLinkedList = new LinkedList("Lakmali", 1);
-// myLinkedList.addElement("Methmini", 101,1);
-// myLinkedList.addElement("Tharush", 290, 101);
-// myLinkedList.displayList();
-// console.log(myLinkedList.getLink("Lakmali", "Methmini"));
-// console.log(myLinkedList.getLink("Methmini", "Lakmali"));
-// console.log(myLinkedList.getLink("Tharush", "Methmini"));
-// console.log(myLinkedList.getLink("Lakmali", "Tharush"));
-// console.log(myLinkedList.getLink("Tharush", "Lakmali"));
+function getDetailsComponents(aminityCategoryType, aminityType, improvementType = '', constructionMethod = '') {
+    const results = {
+        AmenityAreaMeasure: false,
+        AmenityCount: false,
+        AmenityAttachedToManufacturedHomeIndicator: false,
+        SwimmingPoolFeatureType: false
+    };
+    let aminityTypeArray = [];
+    if (aminityCategoryType === "WholeHome" && aminityType === "Balcony" || aminityType === "Porch" || aminityType === "Portico" || aminityType === "Deck" || aminityType === "Patio" || aminityType === "Gazebo" || aminityType === "WoodStove" || aminityType === "IndoorFireplace") {
+        results.AmenityAreaMeasure = true;
+    }
+    if ((aminityCategoryType === "WholeHome" && (aminityType === "WoodStove" || aminityType === "IndoorFireplace"))
+        || (aminityCategoryType === "WholeHome" && (aminityType != "WoodStove" && aminityType != "IndoorFireplace"))) {
+        results.AmenityCount = true;
+    }
+    // if((improvementType === "Dwelling" && constructionMethod ===  "Manufactured" && (amenityType=== "Porch" || amenityType=== "Portico" || amenityType=== "Deck"  ||   amenityType=== "Gazebo"  )) 
+    //   || (improvementType === "Outbuilding" && outBuildingType ===  "ManufacturedHome"  && (amenityType === "Porch" || amenityType === "Portico" || amenityType === "Deck"||amenityType ===  "Gazebo" ) )){
+    //       results.AmenityAttachedToManufacturedHomeIndicator = true;
+    //   }
+    return results;
+}
+console.log(getDetailsComponents("WholeHome", "Balcony"));
