@@ -144,9 +144,7 @@ class Stack{
 //   SwimmingPoolFeatureType:boolean
 // }
 
-function getDetailsComponents(aminityCategoryType:string, aminityType:string , improvementType:string ='', constructionMethod:string ='', ){
-
-
+function getDetailsComponents(aminityCategoryType:string, aminityType:string , improvementType:string , constructionMethod:string, outbuildingType:string  ){
 
 
       const results: any= {
@@ -157,9 +155,9 @@ function getDetailsComponents(aminityCategoryType:string, aminityType:string , i
 
 
     };
-    let aminityTypeArray= [ ]
+    
 
-    if(aminityCategoryType === "WholeHome" && aminityType=== "Balcony"||aminityType===  "Porch"||aminityType=== "Portico"||aminityType===  "Deck"||aminityType=== "Patio"||aminityType=== "Gazebo"||aminityType=== "WoodStove"||aminityType===  "IndoorFireplace" ){
+    if(aminityCategoryType === "WholeHome" && (aminityType=== "Balcony"||aminityType===  "Porch" ||aminityType=== "Portico" ||aminityType===  "Deck" ||aminityType=== "Patio"||aminityType=== "Gazebo"||aminityType=== "WoodStove"||aminityType===  "IndoorFireplace" )){
       results.AmenityAreaMeasure = true;
     }
 
@@ -167,7 +165,17 @@ function getDetailsComponents(aminityCategoryType:string, aminityType:string , i
       || (aminityCategoryType === "WholeHome" && (aminityType !="WoodStove" && aminityType != "IndoorFireplace" ))){
 
       results.AmenityCount = true;
-  }
+    };
+
+    if((improvementType === "Dwelling" && constructionMethod ===  "Manufactured" && (aminityType=== "Porch" || aminityType=== "Portico" || aminityType=== "Deck"  ||   aminityType=== "Gazebo"  )) 
+      || (improvementType === "Outbuilding" && outbuildingType ===  "ManufacturedHome"  && (aminityType === "Porch" || aminityType === "Portico" || aminityType === "Deck"||aminityType ===  "Gazebo" ) )){
+
+          results.AmenityAttachedToManufacturedHomeIndicator = true;
+      }
+    
+    if(aminityType === "IngroundPool" || aminityType === "IngroundSpa" ||aminityType ===  "Sauna"){
+        results.SwimmingPoolFeatureType = true;
+    }
 
 
 
@@ -176,7 +184,43 @@ function getDetailsComponents(aminityCategoryType:string, aminityType:string , i
 }
 
 
-console.log( getDetailsComponents("WholeHome","Balcony" ))
+// Test 1: WholeHome with Balcony
+console.log("Test 1");
+console.log(getDetailsComponents("WholeHome", "Balcony", "", "", ""));
+
+
+// Test 2: WholeHome with WoodStove
+console.log("Test 2");
+console.log(getDetailsComponents("WholeHome", "WoodStove", "", "", ""));
+
+
+// Test 3: Dwelling with Manufactured method and Porch
+console.log("Test 3");
+console.log(getDetailsComponents("", "Porch", "Dwelling", "Manufactured", ""));
+
+
+// Test 4: Outbuilding with ManufacturedHome and Gazebo
+console.log("Test 4");
+console.log(getDetailsComponents("", "Gazebo", "Outbuilding", "", "ManufacturedHome"));
+
+
+// Test 5: Amenity with IngroundPool
+console.log("Test 5");
+console.log(getDetailsComponents("", "IngroundPool", "", "", ""));
+
+
+// Test 6: WholeHome with Patio
+console.log("Test 6");
+console.log(getDetailsComponents("WholeHome", "Patio", "", "", ""));
+
+
+// Test 7: Amenity with Sauna
+ console.log(getDetailsComponents("", "Sauna", "", "", ""));
+
+
+// Test 8: Invalid case with empty parameters
+console.log(getDetailsComponents("", "", "", "", ""));
+
 
 
 

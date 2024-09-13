@@ -67,25 +67,68 @@ class Stack {
         return this.numberArray;
     }
 }
-function getDetailsComponents(aminityCategoryType, aminityType, improvementType = '', constructionMethod = '') {
+// let stack = new Stack();
+// stack.push(1);
+// stack.push(5);
+// stack.push(7);
+// stack.push(3);
+// stack.push(9);
+// stack.push(23);
+// stack.push(7);
+// stack.push(10);
+// stack.push(11);
+// console.log(stack.displayNumberArray())
+// stack.forcePop(7);
+// console.log(stack.displayNumberArray())
+// type Amenity = {
+//   AmenityAreaMeasure: boolean,
+//   AmenityCount:boolean,
+//   AmenityAttachedToManufacturedHomeIndicator:boolean,
+//   SwimmingPoolFeatureType:boolean
+// }
+function getDetailsComponents(aminityCategoryType, aminityType, improvementType, constructionMethod, outbuildingType) {
     const results = {
         AmenityAreaMeasure: false,
         AmenityCount: false,
         AmenityAttachedToManufacturedHomeIndicator: false,
         SwimmingPoolFeatureType: false
     };
-    let aminityTypeArray = [];
-    if (aminityCategoryType === "WholeHome" && aminityType === "Balcony" || aminityType === "Porch" || aminityType === "Portico" || aminityType === "Deck" || aminityType === "Patio" || aminityType === "Gazebo" || aminityType === "WoodStove" || aminityType === "IndoorFireplace") {
+    if (aminityCategoryType === "WholeHome" && (aminityType === "Balcony" || aminityType === "Porch" || aminityType === "Portico" || aminityType === "Deck" || aminityType === "Patio" || aminityType === "Gazebo" || aminityType === "WoodStove" || aminityType === "IndoorFireplace")) {
         results.AmenityAreaMeasure = true;
     }
     if ((aminityCategoryType === "WholeHome" && (aminityType === "WoodStove" || aminityType === "IndoorFireplace"))
         || (aminityCategoryType === "WholeHome" && (aminityType != "WoodStove" && aminityType != "IndoorFireplace"))) {
         results.AmenityCount = true;
     }
-    // if((improvementType === "Dwelling" && constructionMethod ===  "Manufactured" && (amenityType=== "Porch" || amenityType=== "Portico" || amenityType=== "Deck"  ||   amenityType=== "Gazebo"  )) 
-    //   || (improvementType === "Outbuilding" && outBuildingType ===  "ManufacturedHome"  && (amenityType === "Porch" || amenityType === "Portico" || amenityType === "Deck"||amenityType ===  "Gazebo" ) )){
-    //       results.AmenityAttachedToManufacturedHomeIndicator = true;
-    //   }
+    ;
+    if ((improvementType === "Dwelling" && constructionMethod === "Manufactured" && (aminityType === "Porch" || aminityType === "Portico" || aminityType === "Deck" || aminityType === "Gazebo"))
+        || (improvementType === "Outbuilding" && outbuildingType === "ManufacturedHome" && (aminityType === "Porch" || aminityType === "Portico" || aminityType === "Deck" || aminityType === "Gazebo"))) {
+        results.AmenityAttachedToManufacturedHomeIndicator = true;
+    }
+    if (aminityType === "IngroundPool" || aminityType === "IngroundSpa" || aminityType === "Sauna") {
+        results.SwimmingPoolFeatureType = true;
+    }
     return results;
 }
-console.log(getDetailsComponents("WholeHome", "Balcony"));
+// Test 1: WholeHome with Balcony
+console.log("Test 1");
+console.log(getDetailsComponents("WholeHome", "Balcony", "", "", ""));
+// Test 2: WholeHome with WoodStove
+console.log("Test 2");
+console.log(getDetailsComponents("WholeHome", "WoodStove", "", "", ""));
+// Test 3: Dwelling with Manufactured method and Porch
+console.log("Test 3");
+console.log(getDetailsComponents("", "Porch", "Dwelling", "Manufactured", ""));
+// Test 4: Outbuilding with ManufacturedHome and Gazebo
+console.log("Test 4");
+console.log(getDetailsComponents("", "Gazebo", "Outbuilding", "", "ManufacturedHome"));
+// Test 5: Amenity with IngroundPool
+console.log("Test 5");
+console.log(getDetailsComponents("", "IngroundPool", "", "", ""));
+// Test 6: WholeHome with Patio
+console.log("Test 6");
+console.log(getDetailsComponents("WholeHome", "Patio", "", "", ""));
+// Test 7: Amenity with Sauna
+console.log(getDetailsComponents("", "Sauna", "", "", ""));
+// Test 8: Invalid case with empty parameters
+console.log(getDetailsComponents("", "", "", "", ""));
