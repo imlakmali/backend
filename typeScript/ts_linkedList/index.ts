@@ -1,4 +1,4 @@
-
+// Linked List data structure 
 type linkedItem = {
     value: string;
     id: number;
@@ -90,7 +90,7 @@ class LinkedList {
 // console.log(myLinkedList.getLink("Lakmali", "Tharush"));
 // console.log(myLinkedList.getLink("Tharush", "Lakmali"));
 
-
+// Stack data structure
 class Stack{
   numberArray:any =[]
 
@@ -144,6 +144,10 @@ class Stack{
 //   SwimmingPoolFeatureType:boolean
 // }
 
+
+
+
+// nighthawk-analytics  
 function getDetailsComponents(aminityCategoryType:string, aminityType:string , improvementType:string , constructionMethod:string, outbuildingType:string  ){
 
 
@@ -184,49 +188,77 @@ function getDetailsComponents(aminityCategoryType:string, aminityType:string , i
 }
 
 
-// Test 1: WholeHome with Balcony
-console.log("Test 1");
-console.log(getDetailsComponents("WholeHome", "Balcony", "", "", ""));
+// // Test 1: WholeHome with Balcony
+// console.log("Test 1");
+// console.log(getDetailsComponents("WholeHome", "Balcony", "", "", ""));
 
 
-// Test 2: WholeHome with WoodStove
-console.log("Test 2");
-console.log(getDetailsComponents("WholeHome", "WoodStove", "", "", ""));
+// // Test 2: WholeHome with WoodStove
+// console.log("Test 2");
+// console.log(getDetailsComponents("WholeHome", "WoodStove", "", "", ""));
 
 
-// Test 3: Dwelling with Manufactured method and Porch
-console.log("Test 3");
-console.log(getDetailsComponents("", "Porch", "Dwelling", "Manufactured", ""));
+// // Test 3: Dwelling with Manufactured method and Porch
+// console.log("Test 3");
+// console.log(getDetailsComponents("", "Porch", "Dwelling", "Manufactured", ""));
 
 
-// Test 4: Outbuilding with ManufacturedHome and Gazebo
-console.log("Test 4");
-console.log(getDetailsComponents("", "Gazebo", "Outbuilding", "", "ManufacturedHome"));
+// // Test 4: Outbuilding with ManufacturedHome and Gazebo
+// console.log("Test 4");
+// console.log(getDetailsComponents("", "Gazebo", "Outbuilding", "", "ManufacturedHome"));
 
 
-// Test 5: Amenity with IngroundPool
-console.log("Test 5");
-console.log(getDetailsComponents("", "IngroundPool", "", "", ""));
+// // Test 5: Amenity with IngroundPool
+// console.log("Test 5");
+// console.log(getDetailsComponents("", "IngroundPool", "", "", ""));
 
 
-// Test 6: WholeHome with Patio
-console.log("Test 6");
-console.log(getDetailsComponents("WholeHome", "Patio", "", "", ""));
+// // Test 6: WholeHome with Patio
+// console.log("Test 6");
+// console.log(getDetailsComponents("WholeHome", "Patio", "", "", ""));
 
 
-// Test 7: Amenity with Sauna
- console.log(getDetailsComponents("", "Sauna", "", "", ""));
+// // Test 7: Amenity with Sauna
+//  console.log(getDetailsComponents("", "Sauna", "", "", ""));
 
 
-// Test 8: Invalid case with empty parameters
-console.log(getDetailsComponents("", "", "", "", ""));
+// // Test 8: Invalid case with empty parameters
+// console.log(getDetailsComponents("", "", "", "", ""));
+
+
+// 
+
+
+// Queues data structure
+class Queue {
+ employeeArray:string[]=[]
 
 
 
+ enque(elmnt:string){
+  this.employeeArray.push(elmnt);
+ }
 
+ deque(){
+  return this.employeeArray.shift();
+ }
 
+ displayEmployee(){
+  return this.employeeArray
+ }
 
+}
 
+const queue = new Queue();
+
+queue.enque("Amali")
+queue.enque("Nimali")
+queue.enque("Sumali")
+queue.enque("Kamali")
+
+console.log("After enque : ", queue.displayEmployee());
+console.log("Dequed", queue.deque());
+console.log("After dequed : ", queue.displayEmployee());
 
 
 
