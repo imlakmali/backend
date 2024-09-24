@@ -267,14 +267,14 @@ interface Users{
 }
 
 
-class logInDetails{
+class LogInDetails{
 
   // Array Object for store user details.
   private users :Users[] =[]
 
   
 // Convert password string into a hash 
- convertToHash(password:string){
+private convertToHash(password:string){
 
   let hash = 0;
 
@@ -300,7 +300,7 @@ class logInDetails{
   login(user:string, pass:string){
 
     const foundUser = this.users.find((u) => u.userName === user);
-    
+
     if(!foundUser){
       console.log( ` Sorry! we can't found with the user name : ${user}
         Check your user name.`);
@@ -322,7 +322,7 @@ class logInDetails{
 }
 
 
-const loginSystem = new logInDetails();
+const loginSystem = new LogInDetails();
 loginSystem.createUser("Lakmali", "Lakmali@12345");
 loginSystem.createUser("Methmini","Methmini@12345")
 
