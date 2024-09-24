@@ -231,37 +231,102 @@ function getDetailsComponents(aminityCategoryType:string, aminityType:string , i
 
 // Queues data structure
 class Queue {
- employeeArray:string[]=[]
+ nameArray:string[]=[]
 
 
 
  enque(elmnt:string){
-  this.employeeArray.push(elmnt);
+  this.nameArray.push(elmnt);
  }
 
  deque(){
-  return this.employeeArray.shift();
+  return this.nameArray.shift();
  }
 
  displayEmployee(){
-  return this.employeeArray
+  return this.nameArray
  }
 
 }
 
-const queue = new Queue();
+// const queue = new Queue();
 
-queue.enque("Amali")
-queue.enque("Nimali")
-queue.enque("Sumali")
-queue.enque("Kamali")
+// queue.enque("Amali")
+// queue.enque("Nimali")
+// queue.enque("Sumali")
+// queue.enque("Kamali")
 
-console.log("After enque : ", queue.displayEmployee());
-console.log("Dequed", queue.deque());
-console.log("After dequed : ", queue.displayEmployee());
-
-
+// console.log("After enque : ", queue.displayEmployee());
+// console.log("Dequed", queue.deque());
+// console.log("After dequed : ", queue.displayEmployee());
 
 
+interface Users{
+  userName:string;
+  password:string;
+}
 
 
+class logInDetails{
+
+  // Array Object for store user details.
+  private users :Users[] =[]
+
+  
+// Convert password string into a hash 
+ convertToHash(password:string){
+
+  let hash = 0;
+
+  for(let i =0; i < password.length; i++){
+    hash = (hash << 5) - hash + password.charCodeAt(i);
+   
+  }
+  // console.log(hash)
+  return hash.toString()
+}
+
+
+//  Create a new user
+  createUser(userName:string, password:string){
+
+    const hashedPassword = this.convertToHash(password);
+    this.users.push({userName, password:hashedPassword});
+    console.log(`Stored user detail for ${userName}`);
+
+  }
+
+// login a user by cheking user name and password
+  login(user:string, pass:string){
+
+    const foundUser = this.users.find((u) => u.userName === user);
+    
+    if(!foundUser){
+      console.log( ` Sorry! we can't found with the user name : ${user}
+        Check your user name.`);
+      return;
+    }
+
+
+    const hashedPassword = this.convertToHash(pass);
+
+    
+
+    if(foundUser && foundUser.password === hashedPassword){
+      console.log(` Congratulations ${user} Your Login Successful!`);
+      
+    }else{
+      console.log(` Sorry! ${user} Your Login Is Failed.`)
+    }
+  }
+}
+
+
+const loginSystem = new logInDetails();
+loginSystem.createUser("Lakmali", "Lakmali@12345");
+loginSystem.createUser("Methmini","Methmini@12345")
+
+
+loginSystem.login("Lakmali", "Lakmali@12345")
+loginSystem.login("Lakmali", "Lakali@12345")
+loginSystem.login("methmini","Methmini@12345")

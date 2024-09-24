@@ -138,26 +138,58 @@ function getDetailsComponents(aminityCategoryType, aminityType, improvementType,
 // Queues data structure
 class Queue {
     constructor() {
-        this.employeeArray = [];
+        this.nameArray = [];
     }
-    //  constructor(){
-    //   this.employeeArray = []
-    //  }
     enque(elmnt) {
-        this.employeeArray.push(elmnt);
+        this.nameArray.push(elmnt);
     }
     deque() {
-        return this.employeeArray.shift();
+        return this.nameArray.shift();
     }
     displayEmployee() {
-        return this.employeeArray;
+        return this.nameArray;
     }
 }
-const queue = new Queue();
-queue.enque("Amali");
-queue.enque("Nimali");
-queue.enque("Sumali");
-queue.enque("Kamali");
-console.log("After enque : ", queue.displayEmployee());
-console.log("Dequed", queue.deque());
-console.log("After dequed : ", queue.displayEmployee());
+class logInDetails {
+    constructor() {
+        // Array Object for store user details.
+        this.users = [];
+    }
+    // Convert password string into a hash 
+    convertToHash(password) {
+        let hash = 0;
+        for (let i = 0; i < password.length; i++) {
+            hash = (hash << 5) - hash + password.charCodeAt(i);
+        }
+        // console.log(hash)
+        return hash.toString();
+    }
+    //  Create a new user
+    createUser(userName, password) {
+        const hashedPassword = this.convertToHash(password);
+        this.users.push({ userName, password: hashedPassword });
+        console.log(`Stored user detail for ${userName}`);
+    }
+    // login a user by cheking user name and password
+    login(user, pass) {
+        const foundUser = this.users.find((u) => u.userName === user);
+        if (!foundUser) {
+            console.log(` Sorry! we can't found with the user name : ${user}
+        Check your user name`);
+            return;
+        }
+        const hashedPassword = this.convertToHash(pass);
+        if (foundUser && foundUser.password === hashedPassword) {
+            console.log(` Congratulations ${user} Your Login Successful!`);
+        }
+        else {
+            console.log(` Sorry! ${user} Your Login Is Failed.`);
+        }
+    }
+}
+const loginSystem = new logInDetails();
+loginSystem.createUser("Lakmali", "Lakmali@12345");
+loginSystem.createUser("Methmini", "Methmini@12345");
+loginSystem.login("Lakmali", "Lakmali@12345");
+loginSystem.login("Lakmali", "Lakali@12345");
+loginSystem.login("methmini", "Methmini@12345");
