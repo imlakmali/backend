@@ -244,6 +244,8 @@ var LogInDetails = /** @class */ (function () {
 var loginSystem = new LogInDetails('sha1');
 loginSystem.createUser("Lakmali", "Lakmali@12345");
 loginSystem.createUser("Methmini", "Methmini@12345");
+loginSystem.createUser("Tharush", "Methmini@12345");
 loginSystem.login("Lakmali", "Lakmali@12345");
 loginSystem.login("Lakmali", "Lakali@12345");
+loginSystem.login("methmini", "Methmini@12345");
 loginSystem.login("methmini", "Methmini@12345");
