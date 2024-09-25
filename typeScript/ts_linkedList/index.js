@@ -1,41 +1,45 @@
-class LinkedList {
+"use strict";
+// import * as crypto from 'crypto';
+Object.defineProperty(exports, "__esModule", { value: true });
+var LinkedList = /** @class */ (function () {
     // Add root element using constuctor
-    constructor(myValue, myId) {
+    function LinkedList(myValue, myId) {
         this.itemsArray = [];
         this.itemsArray.push({ value: myValue, id: myId, previous: null });
     }
     // Add element for Array
-    addElement(myValue, myId, myPreviousId) {
+    LinkedList.prototype.addElement = function (myValue, myId, myPreviousId) {
         this.itemsArray.push({ value: myValue, id: myId, previous: myPreviousId });
-    }
+    };
     // Get Link for values
-    getLink(startValue, endValue) {
-        let linkPath = [];
-        let startItem = this.itemsArray.find(item => item.value === startValue);
-        let endtItem = this.itemsArray.find(item => item.value === endValue);
+    LinkedList.prototype.getLink = function (startValue, endValue) {
+        var linkPath = [];
+        var startItem = this.itemsArray.find(function (item) { return item.value === startValue; });
+        var endtItem = this.itemsArray.find(function (item) { return item.value === endValue; });
         if (!startItem) {
-            return `Item with value "${startValue}" not found`;
+            return "Item with value \"".concat(startValue, "\" not found");
         }
         if (!endtItem) {
-            return `Item with value "${endValue}" not found`;
+            return "Item with value \"".concat(endValue, "\" not found");
         }
-        let currentItem = startItem;
+        var currentItem = startItem;
         while (currentItem) {
             linkPath.push(currentItem.value);
             if (currentItem.id === endtItem.id) {
                 break;
             }
-            currentItem = this.itemsArray.find(item => item.id === (currentItem === null || currentItem === void 0 ? void 0 : currentItem.previous));
+            currentItem = this.itemsArray.find(function (item) { return item.id === (currentItem === null || currentItem === void 0 ? void 0 : currentItem.previous); });
         }
         if (!currentItem) {
-            return `No link from "${startValue}" to "${endValue}"`;
+            return "No link from \"".concat(startValue, "\" to \"").concat(endValue, "\"");
         }
         return linkPath.reverse().join(" ---> ");
-    }
-    displayList() {
+    };
+    LinkedList.prototype.displayList = function () {
         console.log(this.itemsArray);
-    }
-}
+    };
+    return LinkedList;
+}());
 // let myLinkedList = new LinkedList("Lakmali", 1);
 // myLinkedList.addElement("Methmini", 101,1);
 // myLinkedList.addElement("Tharush", 290, 101);
@@ -46,28 +50,29 @@ class LinkedList {
 // console.log(myLinkedList.getLink("Lakmali", "Tharush"));
 // console.log(myLinkedList.getLink("Tharush", "Lakmali"));
 // Stack data structure
-class Stack {
-    constructor() {
+var Stack = /** @class */ (function () {
+    function Stack() {
         this.numberArray = [];
         this.numberArray = [];
     }
-    push(element) {
+    Stack.prototype.push = function (element) {
         this.numberArray.push(element);
-        console.log(`Pushed : ${element}`);
-    }
-    pop() {
-        const item = this.numberArray.splice(this.numberArray.length - 1, 1);
-        console.log(`Poped: ${item}`);
-    }
-    forcePop(index) {
-        let idx = index - 1;
-        const item = this.numberArray.splice(idx, this.numberArray.length - idx);
-        console.log(`Poped Items: ${item}`);
-    }
-    displayNumberArray() {
+        console.log("Pushed : ".concat(element));
+    };
+    Stack.prototype.pop = function () {
+        var item = this.numberArray.splice(this.numberArray.length - 1, 1);
+        console.log("Poped: ".concat(item));
+    };
+    Stack.prototype.forcePop = function (index) {
+        var idx = index - 1;
+        var item = this.numberArray.splice(idx, this.numberArray.length - idx);
+        console.log("Poped Items: ".concat(item));
+    };
+    Stack.prototype.displayNumberArray = function () {
         return this.numberArray;
-    }
-}
+    };
+    return Stack;
+}());
 // let stack = new Stack();
 // stack.push(1);
 // stack.push(5);
@@ -89,7 +94,7 @@ class Stack {
 // }
 // nighthawk-analytics  
 function getDetailsComponents(aminityCategoryType, aminityType, improvementType, constructionMethod, outbuildingType) {
-    const results = {
+    var results = {
         AmenityAreaMeasure: false,
         AmenityCount: false,
         AmenityAttachedToManufacturedHomeIndicator: false,
@@ -136,58 +141,107 @@ function getDetailsComponents(aminityCategoryType, aminityType, improvementType,
 // console.log(getDetailsComponents("", "", "", "", ""));
 // 
 // Queues data structure
-class Queue {
-    constructor() {
+var Queue = /** @class */ (function () {
+    function Queue() {
         this.nameArray = [];
     }
-    enque(elmnt) {
+    Queue.prototype.enque = function (elmnt) {
         this.nameArray.push(elmnt);
-    }
-    deque() {
+    };
+    Queue.prototype.deque = function () {
         return this.nameArray.shift();
-    }
-    displayEmployee() {
+    };
+    Queue.prototype.displayEmployee = function () {
         return this.nameArray;
-    }
-}
-class logInDetails {
-    constructor() {
+    };
+    return Queue;
+}());
+// const queue = new Queue();
+// queue.enque("Amali")
+// queue.enque("Nimali")
+// queue.enque("Sumali")
+// queue.enque("Kamali")
+// console.log("After enque : ", queue.displayEmployee());
+// console.log("Dequed", queue.deque());
+// console.log("After dequed : ", queue.displayEmployee());
+var crypto = require("crypto");
+var LogInDetails = /** @class */ (function () {
+    function LogInDetails(hashMethod) {
         // Array Object for store user details.
         this.users = [];
+        this.hashMethod = hashMethod;
     }
     // Convert password string into a hash 
-    convertToHash(password) {
-        let hash = 0;
-        for (let i = 0; i < password.length; i++) {
+    LogInDetails.prototype.convertToHash = function (password) {
+        switch (this.hashMethod) {
+            case 'regular':
+                return this.regularHash(password);
+            case 'XOR':
+                return this.xorHash(password);
+            case 'sha-256':
+                return this.sha256Hash(password);
+            case 'sha1':
+                return this.sha1Hash(password);
+            // case 'hex':
+            //   return this.hexHash(password);
+        }
+    };
+    // Reguler Hash Method
+    LogInDetails.prototype.regularHash = function (password) {
+        var hash = 0;
+        for (var i = 0; i < password.length; i++) {
             hash = (hash << 5) - hash + password.charCodeAt(i);
         }
-        // console.log(hash)
         return hash.toString();
-    }
+    };
+    // XOR Hash Method
+    LogInDetails.prototype.xorHash = function (password) {
+        var hash = 0;
+        for (var i = 0; i < password.length; i++) {
+            hash ^= password.charCodeAt(i);
+        }
+        return hash.toString();
+    };
+    // sha-256 Hash Method
+    LogInDetails.prototype.sha256Hash = function (password) {
+        var hash = crypto.createHash('sha256');
+        hash.update(password);
+        return hash.digest('hex');
+    };
+    // Sha1 Hash Method
+    LogInDetails.prototype.sha1Hash = function (password) {
+        var hash = crypto.createHash('sha1');
+        hash.update(password);
+        return hash.digest('hex');
+    };
+    // hex Hash Method
+    // private hexHash(password:string){
+    //   const hash = crypto.getHashes();
+    // }
     //  Create a new user
-    createUser(userName, password) {
-        const hashedPassword = this.convertToHash(password);
-        this.users.push({ userName, password: hashedPassword });
-        console.log(`Stored user detail for ${userName}`);
-    }
+    LogInDetails.prototype.createUser = function (userName, password) {
+        var hashedPassword = this.convertToHash(password);
+        this.users.push({ userName: userName, password: hashedPassword });
+        console.log("Stored user detail for ".concat(userName));
+    };
     // login a user by cheking user name and password
-    login(user, pass) {
-        const foundUser = this.users.find((u) => u.userName === user);
+    LogInDetails.prototype.login = function (user, pass) {
+        var foundUser = this.users.find(function (u) { return u.userName === user; });
         if (!foundUser) {
-            console.log(` Sorry! we can't found with the user name : ${user}
-        Check your user name`);
+            console.log(" Sorry! we can't found with the user name : ".concat(user, "\n        Check your user name."));
             return;
         }
-        const hashedPassword = this.convertToHash(pass);
+        var hashedPassword = this.convertToHash(pass);
         if (foundUser && foundUser.password === hashedPassword) {
-            console.log(` Congratulations ${user} Your Login Successful!`);
+            console.log(" Congratulations ".concat(user, " Your Login Successful!"));
         }
         else {
-            console.log(` Sorry! ${user} Your Login Is Failed.`);
+            console.log(" Sorry! ".concat(user, " Your Login Is Failed."));
         }
-    }
-}
-const loginSystem = new logInDetails();
+    };
+    return LogInDetails;
+}());
+var loginSystem = new LogInDetails('sha1');
 loginSystem.createUser("Lakmali", "Lakmali@12345");
 loginSystem.createUser("Methmini", "Methmini@12345");
 loginSystem.login("Lakmali", "Lakmali@12345");

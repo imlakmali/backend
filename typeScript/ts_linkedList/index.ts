@@ -1,3 +1,8 @@
+
+// import * as crypto from 'crypto';
+
+
+
 // Linked List data structure 
 type linkedItem = {
     value: string;
@@ -260,10 +265,10 @@ class Queue {
 // console.log("Dequed", queue.deque());
 // console.log("After dequed : ", queue.displayEmployee());
 
-
+import * as crypto from 'crypto';
 interface Users{
   userName:string;
-  password:string;
+  password:string| undefined;
 }
 
 
@@ -271,27 +276,89 @@ class LogInDetails{
 
   // Array Object for store user details.
   private users :Users[] =[]
+  private hashMethod: string;
 
+  constructor(hashMethod:string){
+    this.hashMethod = hashMethod;
+  }
   
 // Convert password string into a hash 
 private convertToHash(password:string){
 
+  switch(this.hashMethod){
+    case 'regular':
+      return this.regularHash(password);
+
+    case 'XOR':
+      return this.xorHash(password);
+
+    case 'sha-256':
+      return this.sha256Hash(password);
+
+    case 'sha1':
+      return this.sha1Hash(password);
+
+    // case 'hex':
+    //   return this.hexHash(password);
+  }
+
+}
+
+
+// Reguler Hash Method
+private regularHash(password:string){
+  
   let hash = 0;
 
   for(let i =0; i < password.length; i++){
     hash = (hash << 5) - hash + password.charCodeAt(i);
    
   }
-  // console.log(hash)
+  
   return hash.toString()
 }
+
+
+// XOR Hash Method
+private xorHash(password:string){
+  let hash = 0;
+  for(let i=0; i<password.length; i++){
+    hash ^= password.charCodeAt(i)
+  }
+  return hash.toString();
+}
+
+
+// sha-256 Hash Method
+private sha256Hash(password:string){
+
+  const hash = crypto.createHash('sha256');
+
+  hash.update(password);
+
+  return hash.digest('hex');
+}
+
+// Sha1 Hash Method
+private sha1Hash(password:string){
+
+  const hash = crypto.createHash('sha1');
+  hash.update(password);
+  return hash.digest('hex')
+}
+
+
+// hex Hash Method
+// private hexHash(password:string){
+//   const hash = crypto.getHashes();
+// }
 
 
 //  Create a new user
   createUser(userName:string, password:string){
 
     const hashedPassword = this.convertToHash(password);
-    this.users.push({userName, password:hashedPassword});
+    this.users.push({userName, password: hashedPassword});
     console.log(`Stored user detail for ${userName}`);
 
   }
@@ -322,11 +389,13 @@ private convertToHash(password:string){
 }
 
 
-const loginSystem = new LogInDetails();
+const loginSystem = new LogInDetails('sha1');
 loginSystem.createUser("Lakmali", "Lakmali@12345");
-loginSystem.createUser("Methmini","Methmini@12345")
+loginSystem.createUser("Methmini","Methmini@12345");
+loginSystem.createUser("Tharush","Methmini@12345");
 
 
 loginSystem.login("Lakmali", "Lakmali@12345")
 loginSystem.login("Lakmali", "Lakali@12345")
+loginSystem.login("methmini","Methmini@12345")
 loginSystem.login("methmini","Methmini@12345")
