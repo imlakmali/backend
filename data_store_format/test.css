@@ -1,0 +1,18 @@
+#tree-container {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+div {
+    margin: 5px 0;
+    padding: 10px;
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    background-color: #f9f9f9; 
+}
+
+.children-container {
+    border-left: 2px dashed #aaa; 
+    padding-left: 15px; 
+    margin-left: 10px; 
+}

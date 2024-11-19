@@ -1,0 +1,23 @@
+*{
+    margin: 0;
+    padding: 0;
+    
+}
+
+#tree-container{
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid rgb(16, 16, 16);
+    border-radius: 5px;
+    background-color:#0a371347;
+
+    
+}
+
+#tree-container div{
+    margin: 20px;
+    padding: 10px;
+    border: 1px dashed rgb(12, 13, 13);
+    border-radius: 5px;
+    background-color:#F0C1E1
+}

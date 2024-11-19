@@ -141,6 +141,9 @@ sortStructuredArrayByHierarchy(['0'], LinearData, sortedLinerData)
     // Go through the sorted array and create eache record as a child in inside their respective parent element.
 //  step (3)
     // go throug sorted array 
+
+//  step (4)
+    // 
  
     
 // Next step---

@@ -389,13 +389,15 @@ private sha1Hash(password:string){
 }
 
 
-const loginSystem = new LogInDetails('sha1');
-loginSystem.createUser("Lakmali", "Lakmali@12345");
-loginSystem.createUser("Methmini","Methmini@12345");
-loginSystem.createUser("Tharush","Methmini@12345");
+// const loginSystem = new LogInDetails('regular');
+// loginSystem.createUser("Lakmali", "Lakmali@12345");
+// loginSystem.createUser("Methmini", "Methmini@12345");
+// loginSystem.createUser("Tharush6699", "Taru@12345");
 
 
-loginSystem.login("Lakmali", "Lakmali@12345")
-loginSystem.login("Lakmali", "Lakali@12345")
-loginSystem.login("methmini","Methmini@12345")
-loginSystem.login("methmini","Methmini@12345")
+// loginSystem.login("Lakmali", "Lakmali@12345")
+// loginSystem.login("Lakmali", "Lakali@12345")
+// loginSystem.login("methmini", "Methmini@12345")
+// loginSystem.login("Tharush", "Taru@12345")
+
+

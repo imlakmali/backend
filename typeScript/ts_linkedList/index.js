@@ -241,11 +241,24 @@ var LogInDetails = /** @class */ (function () {
     };
     return LogInDetails;
 }());
-var loginSystem = new LogInDetails('sha1');
-loginSystem.createUser("Lakmali", "Lakmali@12345");
-loginSystem.createUser("Methmini", "Methmini@12345");
-loginSystem.createUser("Tharush", "Methmini@12345");
-loginSystem.login("Lakmali", "Lakmali@12345");
-loginSystem.login("Lakmali", "Lakali@12345");
-loginSystem.login("methmini", "Methmini@12345");
-loginSystem.login("methmini", "Methmini@12345");
+var propertyUnit = {
+    rooms: [
+        { level: 1, roomType: "bedroom" },
+        { level: 1, roomType: "bedroom" },
+        { level: 1, roomType: "bathroom" },
+        { level: 2, roomType: "bedroom" },
+        { level: 2, roomType: "bedroom" },
+        { level: 2, roomType: "kitchen" }
+    ]
+};
+function displayPropertyRooms(property) {
+    console.log("<ROOMS>");
+    property.rooms.forEach(function (room) {
+        console.log("  <ROOM>");
+        console.log("    level: ".concat(room.level));
+        console.log("    room-type: ".concat(room.roomType));
+        console.log("  </ROOM>");
+    });
+    console.log("</ROOMS>");
+}
+displayPropertyRooms(propertyUnit);

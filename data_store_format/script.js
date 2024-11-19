@@ -27,6 +27,10 @@ let LinearData = [
     { "id": "41", "name": "C3c", "parent_id": "14" },
     { "id": "8", "name": "A3", "parent_id": "2" },
     { "id": "5", "name": "D", "parent_id": "1" },
+    { "id": "48", "name": "D3b", "parent_id": "17" },
+    { "id": "45", "name": "D2b", "parent_id": "16" },
+    { "id": "2", "name": "A", "parent_id": "1" },
+    { "id": "3", "name": "B", "parent_id": "1" },
     { "id": "20", "name": "A2a", "parent_id": "7" },
     { "id": "38", "name": "C2c", "parent_id": "13" },
     { "id": "31", "name": "B3a", "parent_id": "11" },
@@ -40,10 +44,7 @@ let LinearData = [
     { "id": "23", "name": "A3a", "parent_id": "8" },
     { "id": "4", "name": "C", "parent_id": "1" },
     { "id": "28", "name": "B2a", "parent_id": "10" },
-    { "id": "48", "name": "D3b", "parent_id": "17" },
-    { "id": "45", "name": "D2b", "parent_id": "16" },
-    { "id": "2", "name": "A", "parent_id": "1" },
-    { "id": "3", "name": "B", "parent_id": "1" },
+    
     { "id": "7", "name": "A2", "parent_id": "2" },
     { "id": "21", "name": "A2b", "parent_id": "7" },
     { "id": "27", "name": "B1b", "parent_id": "9" }
@@ -57,14 +58,15 @@ let LinearData = [
 function sortStructuredArrayByHierarchy(currentParents, sourceArray, destArray) {
 
     currentParents.forEach(parentID => {
-
+       
         let children = sourceArray.filter(item => item.parent_id === parentID);
-
+         
         children.forEach(element => destArray.push(element));
-
+        
         sortStructuredArrayByHierarchy(children.map(element => element.id), sourceArray, destArray);
     });
 }
+
 
 
 function findChildrenArray(parentIds, ChildNode) {
@@ -109,6 +111,25 @@ function findChildrenArray(parentIds, ChildNode) {
  
 }
 
+
+function createDiveElements(node){
+    // create dive for current node
+    const div = document.createElement('div');
+    div.id = `node_${node.id}`;
+    div.textContent = node.name;
+
+    // if node has child
+    if(node.children && node.children.length>0){
+        node.children.forEach(child =>{
+            const childDiv = createDiveElements(child);
+            div.appendChild(childDiv);
+        })
+    }
+
+    return div;
+}
+
+
 function main() {
 
  
@@ -149,9 +170,17 @@ function main() {
         
     });
 
-    console.log(JSON.stringify(hierarchicalData, null, 2));
+     console.log(JSON.stringify(hierarchicalData, null, 2));
     // findChildrenArray(['1', '2'], hierarchicalData);
     // console.log('Test 1:', foundChildren);
+
+
+    const treeContainer = document.getElementById('tree-container');
+
+    if(treeContainer){
+        const treeElement = createDiveElements(hierarchicalData);
+        treeContainer.appendChild(treeElement);
+    }
     
 }
 
@@ -160,6 +189,28 @@ function main() {
 
 // Startup
  main();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
